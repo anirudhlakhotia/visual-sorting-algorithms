@@ -33,3 +33,4 @@ python3 main.py
 
 ### Main Contributors
  - [Anirudh Lakhotia](https://github.com/anirudhlakhotia/)
+ - [Karthik Ram](https://github.com/keju27/)
