@@ -28,7 +28,7 @@ python3 main.py
 ### Technologies Used
 
 - All the visuals were built solely using ![Python](https://img.shields.io/badge/python-%2314354C.svg?style=for-the-badge&logo=python&logoColor=white) 
-- **Tkinter** and **Matplotlib** were the libraries used to create the visuals of the project.
+- [**Tkinter**](https://docs.python.org/3/library/tkinter.html) and [**Matplotlib**](https://matplotlib.org/) were the libraries used to create the visuals of the project.
 
 
 ### Main Contributors
