@@ -23,7 +23,7 @@ data = {
             'Merge Sort': 0.619,
             'Quick Sort': 0.116,
         }
-        
+
 def init_window(title="Sorting Algorithms v/s Time taken to sort 10000 elements ",data=data):
     root=make_root()
     def run_algorithm(algorithm,array = [random.randint(0, 10000) for i in range(10000)]):
@@ -84,6 +84,7 @@ def show_graph(win,name, data):
     win.destroy()
     root=tk.Tk()
     root.title("Time taken to sort 10000 elements")
+    root.geometry("650x450")
     languages=data.keys()
     time=data.values()
 
@@ -96,6 +97,10 @@ def show_graph(win,name, data):
     def back():
         root.destroy()
         init_window()
+    topLeftFrame = tk.Frame(root)
+    topLeftFrame.pack(side=tk.TOP,fill=tk.BOTH,expand=1)
+    back_btn=tk.Button(topLeftFrame,text="Back",command=back)
+    back_btn.place(x=10,y=10)
     # create axes
     axes = figure.add_subplot()
     # create the barchart
@@ -105,10 +110,7 @@ def show_graph(win,name, data):
     axes.set_xlabel('Sorting Algorithms',labelpad=15, fontsize=12)
     
     figure_canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-    topLeftFrame = tk.Frame(root)
-    topLeftFrame.pack(padx=10,pady=10)
-    back_btn=tk.Button(topLeftFrame,text="Back",command=back)
-    back_btn.pack()
+ 
     root.mainloop()
 
 
