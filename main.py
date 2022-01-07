@@ -1,5 +1,9 @@
+import platform
+if platform.system() == "Darwin":
+    from tkmacosx import Button
+else:
+    from tkinter import Button
 import tkinter as tk
-from tkinter import Label, font
 import matplotlib.pyplot as plt
 import matplotlib
 import random
@@ -63,17 +67,17 @@ def init_window(title="Sorting Algorithms v/s Time taken to sort 10000 elements 
     root.grid_columnconfigure(0, weight=1)
     bottomFrame = tk.Frame(root)
     bottomFrame.grid(row=1, column=0, padx=10, pady=40, sticky="s")
-    btn=tk.Button(bottomFrame,text=title,command=lambda:show_graph(root,title,data),pady=5,background="black",fg="white")
+    btn=Button(bottomFrame,text=title,command=lambda:show_graph(root,title,data),pady=5,background="black",fg="white")
     btn.grid(row=1,column=0)
     btn.grid_rowconfigure(0, weight=2)
     btn.grid_columnconfigure(0, weight=1)
-    btn2=tk.Button(button_frame,text="Bubble Sort",command=lambda:run_algorithm("bubble_sort"),pady=10,background="black",fg="white")
+    btn2=Button(button_frame,text="Bubble Sort",command=lambda:run_algorithm("bubble_sort"),pady=10,background="black",fg="white")
     btn2.grid(row=0,column=1,sticky="eW")
-    btn3=tk.Button(button_frame,text="Insertion Sort",command=lambda:run_algorithm("insertion_sort"),pady=10,background="black",fg="white")
+    btn3=Button(button_frame,text="Insertion Sort",command=lambda:run_algorithm("insertion_sort"),pady=10,background="black",fg="white")
     btn3.grid(row=0,column=2,sticky="eW")
-    btn4=tk.Button(button_frame,text="Merge Sort",command=lambda:run_algorithm("merge_sort"),pady=10,background="black",fg="white")
+    btn4=Button(button_frame,text="Merge Sort",command=lambda:run_algorithm("merge_sort"),pady=10,background="black",fg="white")
     btn4.grid(row=1,column=1,sticky="eW")
-    btn5=tk.Button(button_frame,text="Quick Sort",command=lambda:run_algorithm("quicksort"),pady=10,background="black",fg="white")
+    btn5=Button(button_frame,text="Quick Sort",command=lambda:run_algorithm("quicksort"),pady=10,background="black",fg="white")
     btn5.grid(row=1,column=2,sticky="eW")
     button_frame.grid_columnconfigure(0, weight=1)
     button_frame.grid_rowconfigure(0, weight=1)
@@ -99,7 +103,7 @@ def show_graph(win,name, data):
         init_window()
     topLeftFrame = tk.Frame(root)
     topLeftFrame.pack(side=tk.TOP,fill=tk.BOTH,expand=1)
-    back_btn=tk.Button(topLeftFrame,text="Back",command=back)
+    back_btn=Button(topLeftFrame,text="Back",command=back)
     back_btn.place(x=10,y=10)
     # create axes
     axes = figure.add_subplot()
