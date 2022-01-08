@@ -62,8 +62,7 @@ def init_window(title="Sorting Algorithms v/s Time taken to sort 10000 elements 
             init_window()
         back_btn=Button(root,text="Back",command=back,bg='white',fg='black',activebackground='black',activeforeground='white')
         back_btn.place(x=10,y=10)
-        return min(times)
-
+      
 
     button_frame = tk.Frame(root,bg='black')
     button_frame.grid(row=0,column=0)
