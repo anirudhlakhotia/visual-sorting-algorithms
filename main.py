@@ -13,8 +13,8 @@ from timeit import repeat
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg,
-    NavigationToolbar2Tk)
-
+    NavigationToolbar2Tk
+)
 plt.style.use('seaborn-dark')
 def make_root():
     root=tk.Tk()
@@ -22,13 +22,17 @@ def make_root():
     root.geometry("550x350")
     return root
 
-def init_window(title="Sorting Algorithms v/s Time taken to sort 5000 elements "):
+data = {
+            'Bubble Sort': 73.21,
+            'Insertion Sort': 56.71,
+            'Merge Sort': 0.619,
+            'Quick Sort': 0.116,
+        }
+
+def init_window(title="Sorting Algorithms v/s Time taken to sort 10000 elements ",data=data):
     root=make_root()
-    def run_algorithm(algorithm,array = [random.randint(0, 10000) for i in range(5000)]):
-        if button_frame:
-            button_frame.destroy()
-        else:
-            pass
+    def run_algorithm(algorithm,array = [random.randint(0, 10000) for i in range(10000)]):
+        button_frame.destroy()
         titles={"bubble_sort":"Bubble Sort","insertion_sort":"Insertion Sort","merge_sort":"Merge Sort","quicksort":"Quick Sort"}
         stmt = f"{algorithm}({array})"
         # Set up the context and prepare the call to the specified
@@ -47,7 +51,7 @@ def init_window(title="Sorting Algorithms v/s Time taken to sort 5000 elements "
         root.title(titles[algorithm])
         lbl=tk.Label(root,text=titles[algorithm],bg='black',fg='white',font=("Helvetica", 28))
         lbl.place(relx=0.5, rely=0.05, anchor=tk.N)
-        lbl2=tk.Label(root,text=f"Minimum time to sort 5000 elements: {round(min(times),5)} seconds" ,bg='black',fg='green',font=("Helvetica", 16))
+        lbl2=tk.Label(root,text=f"Minimum time to sort 10000 elements: {round(min(times),5)} seconds" ,bg='black',fg='green',font=("Helvetica", 16))
         lbl2.place(relx=0.5, rely=0.7, anchor=tk.N)
         lbl4=tk.Label(root,text=f"Time Complexity: {complexity[algorithm]}" ,bg='black',fg='#48d2ff',font=("Helvetica", 16))
         lbl4.place(relx=0.5, rely=0.6, anchor=tk.N)
@@ -61,22 +65,13 @@ def init_window(title="Sorting Algorithms v/s Time taken to sort 5000 elements "
         return min(times)
 
 
-
     button_frame = tk.Frame(root,bg='black')
     button_frame.grid(row=0,column=0)
     root.grid_rowconfigure(0, weight=1)
     root.grid_columnconfigure(0, weight=1)
     bottomFrame = tk.Frame(root)
     bottomFrame.grid(row=1, column=0, padx=10, pady=40, sticky="s")
-    def make_graph(win,name):
-        data = {
-                'Bubble Sort': run_algorithm('bubble_sort'),
-                'Insertion Sort': run_algorithm('insertion_sort'),
-                'Merge Sort': run_algorithm('merge_sort'),
-                'Quick Sort': run_algorithm('quicksort')
-               }
-        show_graph(root,title,data)
-    btn=Button(bottomFrame,text=title,command=lambda:make_graph(root,title),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
+    btn=Button(bottomFrame,text=title,command=lambda:show_graph(root,title,data),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
     btn.grid(row=1,column=0)
     btn.grid_rowconfigure(0, weight=2)
     btn.grid_columnconfigure(0, weight=1)
@@ -94,11 +89,10 @@ def init_window(title="Sorting Algorithms v/s Time taken to sort 5000 elements "
     root.mainloop()
     
 
-
 def show_graph(win,name, data):
     win.destroy()
     root=tk.Tk()
-    root.title("Time taken to sort 5000 elements")
+    root.title("Time taken to sort 10000 elements")
     root.geometry("650x450")
     root.configure(bg='black')
     languages=data.keys()
@@ -123,7 +117,7 @@ def show_graph(win,name, data):
     # create the barchart
     axes.bar(languages, time,color='#6669eb')
     axes.set_title(name, fontsize=16,pad=25,color='white')
-    axes.set_ylabel('Time taken to sort 5000 elements (seconds)',labelpad=15,fontsize=12,color='white')
+    axes.set_ylabel('Time taken to sort 10000 elements (seconds)',labelpad=15,fontsize=12,color='white')
     axes.set_xlabel('Sorting Algorithms',labelpad=15, fontsize=12,color='white')
     axes.set_facecolor('black')
     axes.tick_params(axis='y', colors='white')
