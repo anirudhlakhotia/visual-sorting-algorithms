@@ -1,9 +1,6 @@
 import platform
 
-if platform.system() == "Darwin":
-    from tkmacosx import Button
-else:
-    from tkinter import Button
+from tkmacosx import Button
 import tkinter as tk
 import matplotlib.pyplot as plt
 import matplotlib
@@ -20,6 +17,7 @@ def make_root():
     root=tk.Tk()
     root.title('Home')
     root.geometry("550x450")
+    root.attributes('-fullscreen',True)
     return root
 
 def init_window(title="Comparison when unsorted "):
@@ -50,14 +48,14 @@ def init_window(title="Comparison when unsorted "):
         lbl.place(relx=0.5, rely=0.05, anchor=tk.N)
         lbl2=tk.Label(root,text=f"Minimum time to sort 5000 elements: {round(min(times),5)} seconds" ,bg='black',fg='green',font=("Helvetica", 16))
         lbl2.place(relx=0.5, rely=0.55, anchor=tk.N)
-        lbl4=tk.Label(root,text=f"Time Complexity: {complexity[algorithm]}" ,bg='black',fg='#48d2ff',font=("Helvetica", 16))
+        lbl4=tk.Label(root,text=f"Time Complexity: {complexity[algorithm]}" ,bg='black',fg='#48d2ff',font=("Helvetica", 20))
         lbl4.place(relx=0.5, rely=0.5, anchor=tk.N)
-        lbl3=tk.Label(root,text=descriptions[algorithm],bg='black',fg='white',font=("Helvetica", 12),justify=tk.LEFT)
+        lbl3=tk.Label(root,text=descriptions[algorithm],bg='black',fg='white',font=("Helvetica", 16),justify=tk.LEFT)
         lbl3.place(relx=0.5,rely=0.3,anchor=tk.N)
         def back():
             root.destroy()
             init_window()
-        back_btn=Button(root,text="Back",command=back,bg='white',fg='black',activebackground='black',activeforeground='white')
+        back_btn=Button(root,text="Back",command=back,bg='white',borderless= True,fg='black',activebackground='black',activeforeground='white')
         back_btn.place(x=10,y=10)
         return min(times)
 
@@ -93,20 +91,21 @@ def init_window(title="Comparison when unsorted "):
                 'Quick Sort': run_algorithm('quicksort',array)
                     }
         show_graph(root,name,data)
-        
-    btn=Button(root,text=title,command=lambda:make_graph(root,title),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
-    sorted_btn=Button(root,text="Comparison when fully sorted",command=lambda:make_graph(root,"Comparison when fully sorted"),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
+
+
+    btn=Button(root,text=title,font=("Helvetica", 20),command=lambda:make_graph(root,title),pady=5,borderless= True,bg="black",fg="white",activebackground='white',activeforeground='black')
+    sorted_btn=Button(root,text="Comparison when fully sorted",font=("Helvetica", 20),borderless= True,command=lambda:make_graph(root,"Comparison when fully sorted"),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
     sorted_btn.place(anchor=tk.N,relx=0.5,rely=0.65)
-    partially_sorted_btn=Button(root,text="Comparison when partially sorted",command=lambda:make_graph(root,"Comparison when partially sorted"),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
+    partially_sorted_btn=Button(root,text="Comparison when partially sorted",font=("Helvetica", 20),borderless= True,command=lambda:make_graph(root,"Comparison when partially sorted"),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
     partially_sorted_btn.place(anchor=tk.N,relx=0.5,rely=0.75)
     btn.place(anchor=tk.N,relx=0.5,rely=0.85)
-    btn2=Button(button_frame,text="Bubble Sort",command=lambda:run_algorithm("bubble_sort"),pady=10,bg="black",fg="white",activebackground='white',activeforeground='black')
+    btn2=Button(button_frame,text="Bubble Sort",font=("Helvetica", 20),command=lambda:run_algorithm("bubble_sort"),borderless= True,pady=10,bg="black",fg="white",activebackground='white',activeforeground='black')
     btn2.grid(row=0,column=1,sticky="eW")
-    btn3=Button(button_frame,text="Insertion Sort",command=lambda:run_algorithm("insertion_sort"),pady=10,bg="black",fg="white",activebackground='white',activeforeground='black')
+    btn3=Button(button_frame,text="Insertion Sort",font=("Helvetica", 20),command=lambda:run_algorithm("insertion_sort"),borderless= True,pady=10,bg="black",fg="white",activebackground='white',activeforeground='black')
     btn3.grid(row=0,column=2,sticky="eW")
-    btn4=Button(button_frame,text="Merge Sort",command=lambda:run_algorithm("merge_sort"),pady=10,bg="black",fg="white",activebackground='white',activeforeground='black')
+    btn4=Button(button_frame,text="Merge Sort",font=("Helvetica", 20),command=lambda:run_algorithm("merge_sort"),borderless= True,pady=10,bg="black",fg="white",activebackground='white',activeforeground='black')
     btn4.grid(row=1,column=1,sticky="eW")
-    btn5=Button(button_frame,text="Quick Sort",command=lambda:run_algorithm("quicksort"),pady=10,bg="black",fg="white",activebackground='white',activeforeground='black')
+    btn5=Button(button_frame,text="Quick Sort",font=("Helvetica", 20),command=lambda:run_algorithm("quicksort"),borderless= True,pady=10,bg="black",fg="white",activebackground='white',activeforeground='black')
     btn5.grid(row=1,column=2,sticky="eW")
     button_frame.grid_columnconfigure(0, weight=1)
     button_frame.grid_rowconfigure(0, weight=1)
@@ -136,22 +135,20 @@ def show_graph(win,name, data):
         init_window()
     topLeftFrame = tk.Frame(root,bg='black')
     topLeftFrame.pack(side=tk.TOP,fill=tk.BOTH,expand=1)
-    back_btn=Button(topLeftFrame,text="Back",command=back,activebackground=root['bg'],activeforeground="white")
+    back_btn=Button(topLeftFrame,text="Back",command=back,borderless= True,activebackground=root['bg'],activeforeground="white")
     back_btn.place(x=10,y=10)
     # create axes
     axes = figure.add_subplot()
     # create the barchart
     axes.bar(languages, time,color='#6669eb')
-    axes.set_title(name, fontsize=16,pad=25,color='white')
-    axes.set_ylabel('Time taken to sort 5000 elements (seconds)',labelpad=15,fontsize=12,color='white')
-    axes.set_xlabel('Sorting Algorithms',labelpad=15, fontsize=12,color='white')
+    axes.set_title(name, fontsize=26,pad=25,color='white')
+    axes.set_ylabel('Time taken to sort 5000 elements (seconds)',labelpad=15,fontsize=18,color='white')
+    axes.set_xlabel('Sorting Algorithms',labelpad=15, fontsize=22,color='white')
     axes.set_facecolor('black')
     axes.tick_params(axis='y', colors='white')
     axes.tick_params(axis='x', colors='white')
 
     figure_canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-    back_btn=Button(root,text="Back",command=back,bg='white',fg='black',activebackground='black',activeforeground='white')
-    back_btn.place(x=10,y=10)
  
     root.mainloop()
 descriptions={"bubble_sort":'''Bubble Sort, sometimes referred to as sinking sort,
