@@ -45,19 +45,20 @@ def init_window(title="Comparison when unsorted "):
         # minimum time it took to run
 
         root.title(titles[algorithm])
+        root.geometry("550x550")
         lbl=tk.Label(root,text=titles[algorithm],bg='black',fg='white',font=("Helvetica", 28))
         lbl.place(relx=0.5, rely=0.05, anchor=tk.N)
         lbl2=tk.Label(root,text=f"Minimum time to sort 5000 elements: {round(min(times),5)} seconds" ,bg='black',fg='green',font=("Helvetica", 16))
-        lbl2.place(relx=0.5, rely=0.7, anchor=tk.N)
+        lbl2.place(relx=0.5, rely=0.55, anchor=tk.N)
         lbl4=tk.Label(root,text=f"Time Complexity: {complexity[algorithm]}" ,bg='black',fg='#48d2ff',font=("Helvetica", 16))
-        lbl4.place(relx=0.5, rely=0.6, anchor=tk.N)
+        lbl4.place(relx=0.5, rely=0.5, anchor=tk.N)
         lbl3=tk.Label(root,text=descriptions[algorithm],bg='black',fg='white',font=("Helvetica", 12),justify=tk.LEFT)
         lbl3.place(relx=0.5,rely=0.3,anchor=tk.N)
         def back():
             root.destroy()
             init_window()
         back_btn=Button(root,text="Back",command=back,bg='white',fg='black',activebackground='black',activeforeground='white')
-        back_btn.place(x=10,y=10)
+        back_btn.place(relx=0.05,rely=0.05,anchor=tk.NW)
         return min(times)
 
 
@@ -93,7 +94,7 @@ def init_window(title="Comparison when unsorted "):
                     }
         show_graph(root,name,data)
 
-        
+
     btn=Button(root,text=title,command=lambda:make_graph(root,title),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
     sorted_btn=Button(root,text="Comparison when fully sorted",command=lambda:make_graph(root,"Comparison when fully sorted"),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
     sorted_btn.place(anchor=tk.N,relx=0.5,rely=0.65)
@@ -137,7 +138,7 @@ def show_graph(win,name, data):
     topLeftFrame = tk.Frame(root,bg='black')
     topLeftFrame.pack(side=tk.TOP,fill=tk.BOTH,expand=1)
     back_btn=Button(topLeftFrame,text="Back",command=back,activebackground=root['bg'],activeforeground="white")
-    back_btn.place(x=10,y=10)
+    back_btn.place(relx=0.05,rely=0.05,anchor=tk.NW)
     # create axes
     axes = figure.add_subplot()
     # create the barchart
