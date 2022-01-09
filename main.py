@@ -144,7 +144,7 @@ def show_graph(win,name, data):
     # create axes
     axes = figure.add_subplot()
     # create the barchart
-    axes.bar(languages, time,color='#6669eb',fon)
+    axes.bar(languages, time,color='#6669eb')
     axes.set_title(name, fontsize=36,pad=25,color='#C0C0C0')
     axes.set_ylabel('Time taken to sort 5000 elements (seconds)',labelpad=15,fontsize=26,color='#C0C0C0')
     axes.set_xlabel('Sorting Algorithms',labelpad=15, fontsize=26,color='#C0C0C0')
