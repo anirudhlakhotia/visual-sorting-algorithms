@@ -92,7 +92,6 @@ def init_window(title="Comparison when unsorted "):
                 'Quick Sort': run_algorithm('quicksort',array)
                     }
         show_graph(root,name,data)
-
         
     btn=Button(root,text=title,command=lambda:make_graph(root,title),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
     sorted_btn=Button(root,text="Comparison when fully sorted",command=lambda:make_graph(root,"Comparison when fully sorted"),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
@@ -150,6 +149,8 @@ def show_graph(win,name, data):
     axes.tick_params(axis='x', colors='white')
 
     figure_canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+    back_btn=Button(root,text="Back",command=back,bg='white',fg='black',activebackground='black',activeforeground='white')
+    back_btn.place(x=10,y=10)
  
     root.mainloop()
 descriptions={"bubble_sort":'''Bubble Sort, sometimes referred to as sinking sort,
