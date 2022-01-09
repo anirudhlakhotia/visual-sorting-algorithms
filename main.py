@@ -17,7 +17,11 @@ def make_root():
     root=tk.Tk()
     root.title('Home')
     root.geometry("550x450")
-    root.attributes('-fullscreen',True)
+    if platform.system() == "Darwin":
+        root.geometry("850x750")
+    else:
+        root.attributes('-fullscreen',True)
+
     return root
 
 def init_window(title="Comparison when unsorted "):
@@ -118,7 +122,11 @@ def show_graph(win,name, data):
     win.destroy()
     root=tk.Tk()
     root.title(name)
-    root.geometry("650x450")
+    if platform.system() == "Darwin":
+        root.geometry("850x750")
+    else:
+        root.attributes('-fullscreen',True)
+
     root.configure(bg='black')
     languages=data.keys()
     time=data.values()
@@ -130,9 +138,12 @@ def show_graph(win,name, data):
     # create the toolbar
     toolbar=NavigationToolbar2Tk(figure_canvas, root,)
     toolbar.configure(background='black')
+        
     def back():
         root.destroy()
         init_window()
+    back_btn=Button(root,text="Back",command=back,bg='white',borderless= True,fg='black',activebackground='black',activeforeground='white')
+    back_btn.place(x=10,y=10)
     topLeftFrame = tk.Frame(root,bg='black')
     topLeftFrame.pack(side=tk.TOP,fill=tk.BOTH,expand=1)
     back_btn=Button(topLeftFrame,text="Back",command=back,borderless= True,activebackground=root['bg'],activeforeground="white")
