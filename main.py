@@ -22,7 +22,7 @@ def make_root():
     root.geometry("550x350")
     return root
 
-def init_window(title="Sorting Algorithms v/s Time taken to sort 5000 elements "):
+def init_window(title="Comparison when unsorted "):
     root=make_root()
     def run_algorithm(algorithm,array = [random.randint(0, 10000) for i in range(5000)]):
         if button_frame:
@@ -61,26 +61,33 @@ def init_window(title="Sorting Algorithms v/s Time taken to sort 5000 elements "
         return min(times)
 
 
-
     button_frame = tk.Frame(root,bg='black')
     button_frame.grid(row=0,column=0)
     root.grid_rowconfigure(0, weight=1)
     root.grid_columnconfigure(0, weight=1)
-    bottomFrame = tk.Frame(root)
-    bottomFrame.grid(row=1, column=0, padx=10, pady=40, sticky="s")
+
     def make_graph(win,name):
         array=[random.randint(0, 10000) for i in range(5000)]
-        data = {
+        sorted_array=sorted(array)
+        if name == "Comparison when fully sorted":
+            data={
+                'Bubble Sort': run_algorithm('bubble_sort',sorted_array),
+                'Insertion Sort': run_algorithm('insertion_sort',sorted_array),
+                'Merge Sort': run_algorithm('merge_sort',sorted_array),
+                'Quick Sort': run_algorithm('quicksort',sorted_array)
+                 }
+        else:
+             data = {
                 'Bubble Sort': run_algorithm('bubble_sort',array),
                 'Insertion Sort': run_algorithm('insertion_sort',array),
                 'Merge Sort': run_algorithm('merge_sort',array),
                 'Quick Sort': run_algorithm('quicksort',array)
-               }
-        show_graph(root,title,data)
-    btn=Button(bottomFrame,text=title,command=lambda:make_graph(root,title),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
-    btn.grid(row=1,column=0)
-    btn.grid_rowconfigure(0, weight=2)
-    btn.grid_columnconfigure(0, weight=1)
+                    }
+        show_graph(root,name,data)
+    btn=Button(root,text=title,command=lambda:make_graph(root,title),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
+    sorted_btn=Button(root,text="Comparison when fully sorted",command=lambda:make_graph(root,"Comparison when fully sorted"),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
+    sorted_btn.place(anchor=tk.N,relx=0.5,rely=0.7)
+    btn.place(anchor=tk.N,relx=0.5,rely=0.55)
     btn2=Button(button_frame,text="Bubble Sort",command=lambda:run_algorithm("bubble_sort"),pady=10,bg="black",fg="white",activebackground='white',activeforeground='black')
     btn2.grid(row=0,column=1,sticky="eW")
     btn3=Button(button_frame,text="Insertion Sort",command=lambda:run_algorithm("insertion_sort"),pady=10,bg="black",fg="white",activebackground='white',activeforeground='black')
@@ -99,7 +106,7 @@ def init_window(title="Sorting Algorithms v/s Time taken to sort 5000 elements "
 def show_graph(win,name, data):
     win.destroy()
     root=tk.Tk()
-    root.title("Time taken to sort 5000 elements")
+    root.title(name)
     root.geometry("650x450")
     root.configure(bg='black')
     languages=data.keys()
