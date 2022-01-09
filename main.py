@@ -19,7 +19,7 @@ plt.style.use('seaborn-dark')
 def make_root():
     root=tk.Tk()
     root.title('Home')
-    root.geometry("550x350")
+    root.geometry("550x450")
     return root
 
 def init_window(title="Comparison when unsorted "):
@@ -76,6 +76,14 @@ def init_window(title="Comparison when unsorted "):
                 'Merge Sort': run_algorithm('merge_sort',sorted_array),
                 'Quick Sort': run_algorithm('quicksort',sorted_array)
                  }
+        elif name == "Comparison when partially sorted":
+            partiallly_sorted_array=sorted_array[:len(array)//2]+[random.randint(0, 10000) for i in range(len(array)//2)]
+            data={
+                'Bubble Sort': run_algorithm('bubble_sort',partiallly_sorted_array),
+                'Insertion Sort': run_algorithm('insertion_sort',partiallly_sorted_array),
+                'Merge Sort': run_algorithm('merge_sort',partiallly_sorted_array),
+                'Quick Sort': run_algorithm('quicksort',partiallly_sorted_array)
+            }
         else:
              data = {
                 'Bubble Sort': run_algorithm('bubble_sort',array),
@@ -84,10 +92,14 @@ def init_window(title="Comparison when unsorted "):
                 'Quick Sort': run_algorithm('quicksort',array)
                     }
         show_graph(root,name,data)
+
+        
     btn=Button(root,text=title,command=lambda:make_graph(root,title),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
     sorted_btn=Button(root,text="Comparison when fully sorted",command=lambda:make_graph(root,"Comparison when fully sorted"),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
-    sorted_btn.place(anchor=tk.N,relx=0.5,rely=0.7)
-    btn.place(anchor=tk.N,relx=0.5,rely=0.55)
+    sorted_btn.place(anchor=tk.N,relx=0.5,rely=0.65)
+    partially_sorted_btn=Button(root,text="Comparison when partially sorted",command=lambda:make_graph(root,"Comparison when partially sorted"),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
+    partially_sorted_btn.place(anchor=tk.N,relx=0.5,rely=0.75)
+    btn.place(anchor=tk.N,relx=0.5,rely=0.85)
     btn2=Button(button_frame,text="Bubble Sort",command=lambda:run_algorithm("bubble_sort"),pady=10,bg="black",fg="white",activebackground='white',activeforeground='black')
     btn2.grid(row=0,column=1,sticky="eW")
     btn3=Button(button_frame,text="Insertion Sort",command=lambda:run_algorithm("insertion_sort"),pady=10,bg="black",fg="white",activebackground='white',activeforeground='black')
