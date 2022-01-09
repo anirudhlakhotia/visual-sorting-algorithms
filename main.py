@@ -69,11 +69,12 @@ def init_window(title="Sorting Algorithms v/s Time taken to sort 5000 elements "
     bottomFrame = tk.Frame(root)
     bottomFrame.grid(row=1, column=0, padx=10, pady=40, sticky="s")
     def make_graph(win,name):
+        array=[random.randint(0, 10000) for i in range(5000)]
         data = {
-                'Bubble Sort': run_algorithm('bubble_sort'),
-                'Insertion Sort': run_algorithm('insertion_sort'),
-                'Merge Sort': run_algorithm('merge_sort'),
-                'Quick Sort': run_algorithm('quicksort')
+                'Bubble Sort': run_algorithm('bubble_sort',array),
+                'Insertion Sort': run_algorithm('insertion_sort',array),
+                'Merge Sort': run_algorithm('merge_sort',array),
+                'Quick Sort': run_algorithm('quicksort',array)
                }
         show_graph(root,title,data)
     btn=Button(bottomFrame,text=title,command=lambda:make_graph(root,title),pady=5,bg="black",fg="white",activebackground='white',activeforeground='black')
