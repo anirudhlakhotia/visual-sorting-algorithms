@@ -13,7 +13,7 @@ from matplotlib.backends.backend_tkagg import (
     NavigationToolbar2Tk)
 
 plt.style.use('seaborn-dark')
-def make_root():
+def make_root()->tk.Tk:
     root=tk.Tk()
     root.title('Home')
     screen_width = root.winfo_screenwidth()
@@ -23,9 +23,9 @@ def make_root():
     #root.attributes('-fullscreen',True)
     return root
 
-def init_window(title="Comparison when unsorted "):
+def init_window(title:str="Comparison when unsorted " ) -> None:
     root=make_root()
-    def run_algorithm(algorithm,array = [random.randint(0, 10000) for i in range(5000)]):
+    def run_algorithm(algorithm:str,array:list = [random.randint(0, 10000) for i in range(5000)]) -> float:
         if button_frame:
             button_frame.destroy()
             heading.destroy()
@@ -70,7 +70,7 @@ def init_window(title="Comparison when unsorted "):
     root.grid_rowconfigure(0, weight=1)
     root.grid_columnconfigure(0, weight=1)
 
-    def make_graph(win,name):
+    def make_graph(win:tk.Tk,name:str)->None:
         array=[random.randint(0, 10000) for i in range(5000)]
         sorted_array=sorted(array)
         if name == "Comparison when fully sorted":
@@ -99,19 +99,19 @@ def init_window(title="Comparison when unsorted "):
 
 
     
-    btn=Button(root,text=title,font=("Helvetica", 20),command=lambda:make_graph(root,title),pady=15,borderless= True,bg="black",fg="#C0C0C0",activebackground='white',activeforeground='black')
-    sorted_btn=Button(root,text="Comparison when fully sorted",font=("Helvetica", 20),borderless= True,command=lambda:make_graph(root,"Comparison when fully sorted"),pady=15,bg="black",fg="#C0C0C0",activebackground='white',activeforeground='black')
+    btn=Button(root,text=title,font=("Helvetica", 20),command=lambda:make_graph(root,title),pady=15,borderless= True,bg="yellow",fg="#252930",activebackground='white',activeforeground='black')
+    sorted_btn=Button(root,text="Comparison when fully sorted",font=("Helvetica", 20),borderless= True,command=lambda:make_graph(root,"Comparison when fully sorted"),pady=15,bg="#32CBF1",fg="#252930",activebackground='white',activeforeground='black')
     sorted_btn.place(anchor=tk.N,relx=0.5,rely=0.7)
-    partially_sorted_btn=Button(root,text="Comparison when partially sorted",font=("Helvetica", 20),borderless= True,command=lambda:make_graph(root,"Comparison when partially sorted"),pady=15,bg="black",fg="#C0C0C0",activebackground='white',activeforeground='black')
+    partially_sorted_btn=Button(root,text="Comparison when partially sorted",font=("Helvetica", 20),borderless= True,command=lambda:make_graph(root,"Comparison when partially sorted"),pady=15,bg="#6ECB5A",fg="#252930",activebackground='white',activeforeground='black')
     partially_sorted_btn.place(anchor=tk.N,relx=0.2,rely=0.7)
     btn.place(anchor=tk.N,relx=0.8,rely=0.7)
-    btn2=Button(button_frame,text="Bubble Sort",font=("Helvetica", 20),command=lambda:run_algorithm("bubble_sort"),borderless= True,pady=25,padx=25,bg="black",fg="#C0C0C0",activebackground='white',activeforeground='black')
+    btn2=Button(button_frame,text="Bubble Sort",font=("Helvetica", 20),command=lambda:run_algorithm("bubble_sort"),borderless= True,pady=25,padx=25,bg="#1b1b1b",fg="#C0C0C0",activebackground='white',activeforeground='black')
     btn2.grid(row=0,column=1,sticky="eW")
-    btn3=Button(button_frame,text="Insertion Sort",font=("Helvetica", 20),command=lambda:run_algorithm("insertion_sort"),borderless= True,pady=25,padx=25,bg="black",fg="#C0C0C0",activebackground='white',activeforeground='black')
+    btn3=Button(button_frame,text="Insertion Sort",font=("Helvetica", 20),command=lambda:run_algorithm("insertion_sort"),borderless= True,pady=25,padx=25,bg="#1b1b1b",fg="#C0C0C0",activebackground='white',activeforeground='black')
     btn3.grid(row=0,column=2,sticky="eW")
-    btn4=Button(button_frame,text="Merge Sort",font=("Helvetica", 20),command=lambda:run_algorithm("merge_sort"),borderless= True,pady=25,bg="black",fg="#C0C0C0",activebackground='white',activeforeground='black')
+    btn4=Button(button_frame,text="Merge Sort",font=("Helvetica", 20),command=lambda:run_algorithm("merge_sort"),borderless= True,pady=25,bg="#1b1b1b",fg="#C0C0C0",activebackground='white',activeforeground='black')
     btn4.grid(row=1,column=1,sticky="eW")
-    btn5=Button(button_frame,text="Quick Sort",font=("Helvetica", 20),command=lambda:run_algorithm("quicksort"),borderless= True,pady=25,bg="black",fg="#C0C0C0",activebackground='white',activeforeground='black')
+    btn5=Button(button_frame,text="Quick Sort",font=("Helvetica", 20),command=lambda:run_algorithm("quicksort"),borderless= True,pady=25,bg="#1b1b1b",fg="#C0C0C0",activebackground='white',activeforeground='black')
     btn5.grid(row=1,column=2,sticky="eW")
     button_frame.grid_columnconfigure(0, weight=1)
     button_frame.grid_rowconfigure(0, weight=1)
@@ -120,7 +120,7 @@ def init_window(title="Comparison when unsorted "):
     
 
 
-def show_graph(win,name, data):
+def show_graph(win:tk.Tk,name:str, data:dict)->None:
     win.destroy()
     root=make_root()
     root.title(name)
