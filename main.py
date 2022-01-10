@@ -28,7 +28,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
     root = make_root()
 
     def run_algorithm(
-        algorithm: str, 
+        algorithm: str,
         array: list = [random.randint(0, 10000) for i in range(5000)]
     ) -> float:
         if button_frame:
@@ -71,7 +71,8 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         algo_name.place(relx=0.5, rely=0.05, anchor=tk.N)
         min_time = tk.Label(
             root,
-            text=f"Minimum time to sort 5000 elements: {round(min(times),5)} seconds",
+            text=f"Minimum time to sort 5000 elements: \
+{ round(min(times),5)} seconds",
             bg="black",
             fg="green",
             font=("Helvetica", 26),
@@ -131,7 +132,9 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         if name == "Comparison when fully sorted":
             data = {
                 "Bubble Sort": run_algorithm("bubble_sort", sorted_array),
-                "Insertion Sort": run_algorithm("insertion_sort", sorted_array),
+                "Insertion Sort": run_algorithm(
+                    "insertion_sort", sorted_array
+                    ),
                 "Merge Sort": run_algorithm("merge_sort", sorted_array),
                 "Quick Sort": run_algorithm("quicksort", sorted_array),
             }
@@ -140,12 +143,18 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                 random.randint(0, 10000) for i in range(len(array) // 2)
             ]
             data = {
-                "Bubble Sort": run_algorithm("bubble_sort", partiallly_sorted_array),
+                "Bubble Sort": run_algorithm(
+                    "bubble_sort", partiallly_sorted_array
+                    ),
                 "Insertion Sort": run_algorithm(
                     "insertion_sort", partiallly_sorted_array
                 ),
-                "Merge Sort": run_algorithm("merge_sort", partiallly_sorted_array),
-                "Quick Sort": run_algorithm("quicksort", partiallly_sorted_array),
+                "Merge Sort": run_algorithm(
+                    "merge_sort", partiallly_sorted_array
+                    ),
+                "Quick Sort": run_algorithm(
+                    "quicksort", partiallly_sorted_array
+                    ),
             }
         else:
             data = {
@@ -270,7 +279,9 @@ def show_graph(win: tk.Tk, name: str, data: dict) -> None:
     time = data.values()
 
     # create a figure
-    figure = Figure(figsize=(8, 8), dpi=100, facecolor="black", edgecolor="black")
+    figure = Figure(
+        figsize=(8, 8), dpi=100, facecolor="black", edgecolor="black"
+        )
     # create FigureCanvasTkAgg object
     figure_canvas = FigureCanvasTkAgg(figure, root)
     # create the toolbar
@@ -306,7 +317,9 @@ def show_graph(win: tk.Tk, name: str, data: dict) -> None:
         fontsize=26,
         color="#C0C0C0",
     )
-    axes.set_xlabel("Sorting Algorithms", labelpad=15, fontsize=26, color="#C0C0C0")
+    axes.set_xlabel(
+        "Sorting Algorithms", labelpad=15, fontsize=26, color="#C0C0C0"
+        )
     axes.set_facecolor("black")
     axes.tick_params(axis="y", colors="#C0C0C0")
     axes.tick_params(axis="x", colors="#C0C0C0")
@@ -320,15 +333,17 @@ descriptions = {
     "bubble_sort": """Bubble Sort, sometimes referred to as sinking sort,
 is a simple sorting algorithm that repeatedly steps through the list,
 compares adjacent elements and swaps them if they are in the wrong order.""",
-    "insertion_sort": """Insertion Sort is a simple sorting algorithm, that builds the final sorted array (or list) one item at a time. """,
+    "insertion_sort": "Insertion Sort is a simple sorting algorithm, \
+that builds the final sorted array (or list) one item at a time.",
     "merge_sort": """Merge Sort comparison-based sorting algorithm. Most implementations
 produce a stable sort, which means that the order of equal elements is the
 same in the input and output. Merge sort is a divide and conquer algorithm""",
-    "quicksort": """Quicksort is a divide-and-conquer algorithm.
-It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays,
-according to whether they are less than or greater than the pivot
-For this reason, it is sometimes called partition-exchange sort.
-The sub-arrays are then sorted recursively. """,
+    "quicksort": "Quicksort is a divide-and-conquer algorithm.\n\
+It works by selecting a 'pivot' element from the array \
+and partitioning the other elements into two sub-arrays,\n\
+according to whether they are less than or greater than the pivot\n\
+For this reason, it is sometimes called partition-exchange sort.\n\
+The sub-arrays are then sorted recursively. ",
 }
 
 complexity = {
