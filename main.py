@@ -15,6 +15,19 @@ plt.style.use("seaborn-dark")
 
 
 def make_root() -> tk.Tk:
+    '''Creates a root window
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    root : tk.Tk
+    a Tkinter Window
+    
+    '''
+    
     root = tk.Tk()
     root.title("Home")
     screen_width = root.winfo_screenwidth()
@@ -25,12 +38,39 @@ def make_root() -> tk.Tk:
 
 
 def init_window(title: str = "Comparison when unsorted ") -> None:
+
+    '''Creates a window
+
+    Parameters
+    ----------
+    title : str,optional
+    The title of the window
+
+    Returns
+    -------
+    None
+    '''
     root = make_root()
 
     def run_algorithm(
         algorithm: str,
         array: list = [random.randint(0, 10000) for i in range(5000)]
     ) -> float:
+        '''Runs an algorithm out of the list of algorithms
+        
+        Parameters
+        ----------
+        algorithm : str
+        The name of the algorithm to run
+        array : list, optional
+        The array to carry out the operation on
+
+        Returns
+        -------
+        time : float
+        Minimum time taken for the algorithm to run on the array
+        '''
+    
         if button_frame:
             button_frame.destroy()
             heading.destroy()
@@ -97,6 +137,16 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         description.place(relx=0.5, rely=0.2, anchor=tk.N)
 
         def back():
+            '''Returns to the main menu
+
+            Parameters
+            ----------
+            None
+
+            Returns
+            -------
+            None
+            '''
             root.destroy()
             init_window()
 
@@ -272,6 +322,21 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
 
 
 def show_graph(win: tk.Tk, name: str, data: dict) -> None:
+    '''Shows the graph of the comparison amongst algorithms for a given array
+       
+    Parameters
+    ----------
+    win : tk.Tk
+        Previous window that is to be destroyed
+    name : str
+        The title for the new window
+    data : dict
+        The data to be plotted
+
+    Returns
+    -------
+    None
+    '''
     win.destroy()
     root = make_root()
     root.title(name)
@@ -292,6 +357,16 @@ def show_graph(win: tk.Tk, name: str, data: dict) -> None:
     toolbar.configure(background="black")
 
     def back():
+        '''Returns to the main menu
+        
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    None
+        '''
         root.destroy()
         init_window()
 
