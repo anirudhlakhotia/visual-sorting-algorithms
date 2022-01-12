@@ -1,3 +1,4 @@
+
 # Visual Sorting Algorithms
 
 ![visual-sorting-algorithms](https://socialify.git.ci/anirudhlakhotia/visual-sorting-algorithms/image?description=1&descriptionEditable=Distinguish%20amongst%20various%20sorting%20algorithms%20in%20Python%20visually&font=Raleway&language=1&name=1&owner=1&pattern=Solid&theme=Light)
@@ -29,6 +30,11 @@ python3 main.py
 
 - All the visuals were built solely using ![Python](https://img.shields.io/badge/python-%2314354C.svg?style=for-the-badge&logo=python&logoColor=white) 
 - [**Tkinter**](https://docs.python.org/3/library/tkinter.html) and [**Matplotlib**](https://matplotlib.org/) were the libraries used to create the visuals of the project.
+
+## Demo
+Check out the demo for a quick example of how the project works!
+
+![compgif](https://user-images.githubusercontent.com/92427479/149163000-3e46b32f-b6d6-44de-9014-d6b23b01d583.gif)
 
 ## Contributing
 
