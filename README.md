@@ -30,6 +30,10 @@ python3 main.py
 - All the visuals were built solely using ![Python](https://img.shields.io/badge/python-%2314354C.svg?style=for-the-badge&logo=python&logoColor=white) 
 - [**Tkinter**](https://docs.python.org/3/library/tkinter.html) and [**Matplotlib**](https://matplotlib.org/) were the libraries used to create the visuals of the project.
 
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
 
 ### Main Contributors
  - [Anirudh Lakhotia](https://github.com/anirudhlakhotia/)
