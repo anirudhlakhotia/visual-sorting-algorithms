@@ -6,6 +6,7 @@
 Sorting is an integral operation in the world of Computer Science.  
 This project aims to visually distinguish amongst various sorting algorithms in Python.
 
+
 ## Getting Started
 
 ### Prerequisites
@@ -34,7 +35,7 @@ python3 main.py
 ## Demo
 Check out the demo for a quick example of how the project works!
 
-![compgif](https://user-images.githubusercontent.com/92427479/149163000-3e46b32f-b6d6-44de-9014-d6b23b01d583.gif)
+![Demo GIF](https://user-images.githubusercontent.com/92427479/149163000-3e46b32f-b6d6-44de-9014-d6b23b01d583.gif)
 
 ## Contributing
 

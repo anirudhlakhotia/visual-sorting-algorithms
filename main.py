@@ -54,7 +54,8 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
 
     def run_algorithm(
         algorithm: str,
-        array: list = [random.randint(0, 10000) for i in range(5000)]
+        array: list = [random.randint(0, 10000) for i in range(5000)],
+        n:int=5000,
     ) -> float:
         '''Runs an algorithm out of the list of algorithms
         
@@ -70,7 +71,8 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         time : float
         Minimum time taken for the algorithm to run on the array
         '''
-    
+        if array is None:
+            array = [random.randint(0, 10000) for i in range(n)]
         if button_frame:
             button_frame.destroy()
             heading.destroy()
@@ -95,7 +97,6 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         # Execute the code ten different times and return the time
         # in seconds that each execution took
         times = repeat(setup=setup_code, stmt=stmt, repeat=3, number=10)
-
         # Finally, display the name of the algorithm and the
         # minimum time it took to run
 
@@ -111,8 +112,8 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         algo_name.place(relx=0.5, rely=0.05, anchor=tk.N)
         min_time = tk.Label(
             root,
-            text=f"Minimum time to sort 5000 elements: \
-{ round(min(times),5)} seconds",
+            text=f"Minimum time to sort {n} elements: \
+{ round(min(times),5)/10} seconds",
             bg="black",
             fg="green",
             font=("Helvetica", 26),
@@ -161,7 +162,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             activeforeground="#C0C0C0",
         )
         back_btn.place(x=10, y=10)
-        return min(times)
+        return min(times)/10
 
     heading = tk.Label(
         root,
@@ -176,17 +177,73 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
     root.grid_rowconfigure(0, weight=1)
     root.grid_columnconfigure(0, weight=1)
 
-    def make_graph(win: tk.Tk, name: str) -> None:
-        array = [random.randint(0, 10000) for i in range(5000)]
+    def get_value(win:tk.Tk,name: str,function:any) -> None:
+        '''Gets the value of the input box
+
+        Parameters
+        ----------
+        win : tk.Tk
+        The previous window to pass
+
+        name : str
+        The name for creating title for the next window
+
+        function : any
+        Used to differentiate between the function to run based on origin of the call
+
+        Returns
+        -------
+        None
+        '''
+
+        n=0
+        is_make=id(function) == id(make_graph)
+        def submit():
+            nonlocal n
+            n=int(e1.get())
+            root.destroy()
+            if is_make :
+                make_graph(win,name,n)
+            else:
+                array = [random.randint(0, 10000) for i in range(n)]
+                run_algorithm(function,array,n)
+    
+        root=make_root()
+        tk.Label(root, text="Enter the number of elements you wish to sort",bg=root['bg'],font=("Helvetica", 24)).place(relx=0.5, rely=0.1, anchor=tk.N,)
+        e1 = tk.Entry(root,insertbackground="black",bg="black",fg="#C0C0C0",font=("Helvetica", 24))
+        e1.place(relx=0.5, rely=0.2, anchor=tk.N)
+        submit_btn=Button(root,text="Submit",command=submit,bg="#C0C0C0",borderless=True,fg="black",activebackground="black",activeforeground="#C0C0C0",padx=10,pady=10,font=("Helvetica", 24))
+        submit_btn.place(relx=0.5, rely=0.35, anchor=tk.CENTER)
+        root.mainloop()
+        
+
+    def make_graph(win: tk.Tk, name: str, n:int) -> None:
+        #print(f"N in make graph is {n}")
+        '''Creates a graph of the time taken to sort an array
+         
+        Parameters
+        ----------
+        win : tk.Tk 
+        The previous window
+
+        name : str
+        The title of the window
+
+        Returns
+        -------
+        None
+        '''
+       # print("MAKE GRAPH N",n)
+        array = [random.randint(0, 10000) for i in range(n)]
         sorted_array = sorted(array)
         if name == "Comparison when fully sorted":
             data = {
-                "Bubble Sort": run_algorithm("bubble_sort", sorted_array),
+                "Bubble Sort": run_algorithm("bubble_sort", sorted_array, n),
                 "Insertion Sort": run_algorithm(
-                    "insertion_sort", sorted_array
+                    "insertion_sort", sorted_array,n
                     ),
-                "Merge Sort": run_algorithm("merge_sort", sorted_array),
-                "Quick Sort": run_algorithm("quicksort", sorted_array),
+                "Merge Sort": run_algorithm("merge_sort", sorted_array,n),
+                "Quick Sort": run_algorithm("quicksort", sorted_array,n),
             }
         elif name == "Comparison when partially sorted":
             partiallly_sorted_array = sorted_array[: len(array) // 2] + [
@@ -194,32 +251,32 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             ]
             data = {
                 "Bubble Sort": run_algorithm(
-                    "bubble_sort", partiallly_sorted_array
+                    "bubble_sort", partiallly_sorted_array,n
                     ),
                 "Insertion Sort": run_algorithm(
-                    "insertion_sort", partiallly_sorted_array
+                    "insertion_sort", partiallly_sorted_array,n
                 ),
                 "Merge Sort": run_algorithm(
-                    "merge_sort", partiallly_sorted_array
+                    "merge_sort", partiallly_sorted_array,n
                     ),
                 "Quick Sort": run_algorithm(
-                    "quicksort", partiallly_sorted_array
+                    "quicksort", partiallly_sorted_array,n
                     ),
             }
         else:
             data = {
-                "Bubble Sort": run_algorithm("bubble_sort", array),
-                "Insertion Sort": run_algorithm("insertion_sort", array),
-                "Merge Sort": run_algorithm("merge_sort", array),
-                "Quick Sort": run_algorithm("quicksort", array),
+                "Bubble Sort": run_algorithm("bubble_sort", array,n),
+                "Insertion Sort": run_algorithm("insertion_sort", array,n),
+                "Merge Sort": run_algorithm("merge_sort", array,n),
+                "Quick Sort": run_algorithm("quicksort", array,n),
             }
         show_graph(root, name, data)
-
+    
     unsorted_btn = Button(
         root,
         text=title,
         font=("Helvetica", 20),
-        command=lambda: make_graph(root, title),
+        command=lambda: get_value(root, title, make_graph),
         pady=15,
         borderless=True,
         bg="yellow",
@@ -234,7 +291,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         text="Comparison when fully sorted",
         font=("Helvetica", 20),
         borderless=True,
-        command=lambda: make_graph(root, "Comparison when fully sorted"),
+        command=lambda: get_value(root, "Comparison when fully sorted",make_graph),
         pady=15,
         bg="#32CBF1",
         fg="#252930",
@@ -248,7 +305,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         text="Comparison when partially sorted",
         font=("Helvetica", 20),
         borderless=True,
-        command=lambda: make_graph(root, "Comparison when partially sorted"),
+        command=lambda: get_value(root, "Comparison when partially sorted",make_graph),
         pady=15,
         bg="#6ECB5A",
         fg="#252930",
@@ -256,12 +313,12 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         activeforeground="black",
     )
     partially_sorted_btn.place(anchor=tk.N, relx=0.2, rely=0.7)
-
+   
     bubble_sort_btn = Button(
         button_frame,
         text="Bubble Sort",
         font=("Helvetica", 20),
-        command=lambda: run_algorithm("bubble_sort"),
+        command=lambda: get_value(root,"Bubble Sort","bubble_sort"),
         borderless=True,
         pady=25,
         padx=25,
@@ -276,7 +333,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         button_frame,
         text="Insertion Sort",
         font=("Helvetica", 20),
-        command=lambda: run_algorithm("insertion_sort"),
+        command=lambda: get_value(root,"Insertion Sort","insertion_sort"),
         borderless=True,
         pady=25,
         padx=25,
@@ -291,7 +348,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         button_frame,
         text="Merge Sort",
         font=("Helvetica", 20),
-        command=lambda: run_algorithm("merge_sort"),
+        command=lambda: get_value(root,"Merge Sort","merge_sort"),
         borderless=True,
         pady=25,
         bg="#1b1b1b",
@@ -305,7 +362,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         button_frame,
         text="Quick Sort",
         font=("Helvetica", 20),
-        command=lambda: run_algorithm("quicksort"),
+        command=lambda: get_value(root,"Quick Sort","quicksort"),
         borderless=True,
         pady=25,
         bg="#1b1b1b",
