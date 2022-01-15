@@ -270,7 +270,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                 "Merge Sort": run_algorithm("merge_sort", array,n),
                 "Quick Sort": run_algorithm("quicksort", array,n),
             }
-        show_graph(root, name, data)
+        show_graph(root, name, data,n)
     
     unsorted_btn = Button(
         root,
@@ -378,7 +378,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
     root.mainloop()
 
 
-def show_graph(win: tk.Tk, name: str, data: dict) -> None:
+def show_graph(win: tk.Tk, name: str, data: dict,n=5000) -> None:
     '''Shows the graph of the comparison amongst algorithms for a given array
        
     Parameters
@@ -444,7 +444,7 @@ def show_graph(win: tk.Tk, name: str, data: dict) -> None:
     axes.bar(languages, time, color="#6669eb")
     axes.set_title(name, fontsize=36, pad=25, color="#C0C0C0")
     axes.set_ylabel(
-        "Time taken to sort 5000 elements (seconds)",
+        f"Time taken to sort {n} elements (seconds)",
         labelpad=15,
         fontsize=26,
         color="#C0C0C0",
