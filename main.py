@@ -72,7 +72,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         Minimum time taken for the algorithm to run on the array
         '''
         if array is None:
-            array = [random.randint(0, 10000) for i in range(n)]
+            array = [random.randint(0, 2*n) for i in range(n)]
         if button_frame:
             button_frame.destroy()
             heading.destroy()
@@ -83,6 +83,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             "insertion_sort": "Insertion Sort",
             "merge_sort": "Merge Sort",
             "quicksort": "Quick Sort",
+            "sorted": "Built-in Sort(Tim Sort)",
         }
         stmt = f"{algorithm}({array})"
         # Set up the context and prepare the call to the specified
@@ -99,7 +100,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         times = repeat(setup=setup_code, stmt=stmt, repeat=3, number=10)
         # Finally, display the name of the algorithm and the
         # minimum time it took to run
-
+        #print(f"{titles[algorithm]} :  seconds")
         root.title(titles[algorithm])
 
         algo_name = tk.Label(
@@ -205,7 +206,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             if is_make :
                 make_graph(win,name,n)
             else:
-                array = [random.randint(0, 10000) for i in range(n)]
+                array = [random.randint(0, 2*n) for i in range(n)]
                 run_algorithm(function,array,n)
     
         root=make_root()
@@ -234,7 +235,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         None
         '''
        # print("MAKE GRAPH N",n)
-        array = [random.randint(0, 10000) for i in range(n)]
+        array = [random.randint(0, 2*n) for i in range(n)]
         sorted_array = sorted(array)
         if name == "Comparison when fully sorted":
             data = {
@@ -244,10 +245,11 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                     ),
                 "Merge Sort": run_algorithm("merge_sort", sorted_array,n),
                 "Quick Sort": run_algorithm("quicksort", sorted_array,n),
+                "Built-in Sort(Tim Sort)": run_algorithm("sorted", sorted_array,n),
             }
         elif name == "Comparison when partially sorted":
             partiallly_sorted_array = sorted_array[: len(array) // 2] + [
-                random.randint(0, 10000) for i in range(len(array) // 2)
+                random.randint(0, n) for i in range(len(array) // 2)
             ]
             data = {
                 "Bubble Sort": run_algorithm(
@@ -262,6 +264,9 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                 "Quick Sort": run_algorithm(
                     "quicksort", partiallly_sorted_array,n
                     ),
+                 "Built-in Sort(Tim Sort)": run_algorithm(
+                     "sorted", partiallly_sorted_array,n
+                        ),
             }
         else:
             data = {
@@ -269,6 +274,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                 "Insertion Sort": run_algorithm("insertion_sort", array,n),
                 "Merge Sort": run_algorithm("merge_sort", array,n),
                 "Quick Sort": run_algorithm("quicksort", array,n),
+                "Built-in Sort(Tim Sort)": run_algorithm("sorted", array,n),
             }
         show_graph(root, name, data,n)
     
@@ -397,6 +403,8 @@ def show_graph(win: tk.Tk, name: str, data: dict,n=5000) -> None:
     win.destroy()
     root = make_root()
     root.title(name)
+    print(data['Quick Sort']/data['Built-in Sort(Tim Sort)'])
+    print('RATIO')
     languages = data.keys()
     time = data.values()
 
@@ -476,6 +484,7 @@ and partitioning the other elements into two sub-arrays,\n\
 according to whether they are less than or greater than the pivot\n\
 For this reason, it is sometimes called partition-exchange sort.\n\
 The sub-arrays are then sorted recursively. ",
+"sorted": "The built in sort function in Python is Tim Sort.\nIt implements the idea that the real-world data sets almost always contain already ordered subsequences,\n so the sorting strategy is to identify them and sort them further using both merge and insert methods",
 }
 
 complexity = {
@@ -483,5 +492,6 @@ complexity = {
     "insertion_sort": "O(n^2)",
     "merge_sort": "O(n log n)",
     "quicksort": "O(n log n)",
-}
+    "sorted": "O(n log n) ",
+    }
 init_window()
