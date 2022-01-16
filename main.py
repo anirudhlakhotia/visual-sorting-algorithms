@@ -114,7 +114,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         min_time = tk.Label(
             root,
             text=f"Minimum time to sort {n} elements: \
-{ round(min(times),5)/10} seconds",
+{ (min(times))/10} seconds",
             bg="black",
             fg="green",
             font=("Helvetica", 26),
