@@ -7,7 +7,9 @@ from matplotlib.backends.backend_tkagg import (
 import tkinter as tk
 import matplotlib.pyplot as plt
 import matplotlib
+from matplotlib import animation
 import random
+import visualisations as visual
 matplotlib.use("TkAgg")
 
 
@@ -36,6 +38,48 @@ def make_root() -> tk.Tk:
     root.configure(background="black")
     return root
 
+def visualize(array: list, name:str, titles:dict):
+    '''Visualizes the comparison of algorithms for a given array'''
+      
+    # creates a generator object containing all 
+    # the states of the array while performing 
+    # sorting algorithm
+    if name == 'bubble_sort':
+       generator = visual.bubble_sort(array)
+    elif name == 'insertion_sort':
+        generator = visual.insertion_sort(array)
+      
+    # creates a figure and subsequent subplots
+    fig, ax = plt.subplots()
+    ax.set_title(f"{titles[name]} {complexity[name]}")
+    bar_sub = ax.bar(range(len(array)), array, align="edge")
+      
+    # sets the maximum limit for the x-axis
+    ax.set_xlim(0, len(array))
+    iteration = [0]
+      
+    # helper function to update each frame in plot
+    def update(A, rects, iteration):
+        for rect, val in zip(rects, A):
+            rect.set_height(val)
+        iteration[0] += 1
+  
+    # creating animation object for rendering the iteration
+    anim = animation.FuncAnimation(
+        fig,
+        func=update,
+        fargs=(bar_sub, iteration),
+        frames=generator,
+        repeat=True,
+        blit=False,
+        interval=0,
+        save_count=90000,
+    )
+      
+    # for showing the animation on screen
+    plt.show()
+    plt.close()
+  
 
 def init_window(title: str = "Comparison when unsorted ") -> None:
 
@@ -163,6 +207,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             activeforeground="#C0C0C0",
         )
         back_btn.place(x=10, y=10)
+        visualize(array, algorithm,titles)
         return min(times)/10
 
     heading = tk.Label(
@@ -201,7 +246,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         is_make=id(function) == id(make_graph)
         def submit():
             nonlocal n
-            n=int(e1.get())
+            n=int(no_of_elements.get())
             root.destroy()
             if is_make :
                 make_graph(win,name,n)
@@ -211,8 +256,8 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
     
         root=make_root()
         tk.Label(root, text="Enter the number of elements you wish to sort",bg=root['bg'],font=("Helvetica", 24)).place(relx=0.5, rely=0.1, anchor=tk.N,)
-        e1 = tk.Entry(root,insertbackground="black",bg="black",fg="#C0C0C0",font=("Helvetica", 24))
-        e1.place(relx=0.5, rely=0.2, anchor=tk.N)
+        no_of_elements = tk.Entry(root,insertbackground="black",bg="black",fg="#C0C0C0",font=("Helvetica", 24))
+        no_of_elements.place(relx=0.5, rely=0.2, anchor=tk.N)
         submit_btn=Button(root,text="Submit",command=submit,bg="#C0C0C0",borderless=True,fg="black",activebackground="black",activeforeground="#C0C0C0",padx=10,pady=10,font=("Helvetica", 24))
         submit_btn.place(relx=0.5, rely=0.35, anchor=tk.CENTER)
         root.mainloop()
