@@ -48,6 +48,7 @@ def visualize(array: list, name:str, titles:dict):
        generator = visual.bubble_sort(array)
     elif name == 'insertion_sort':
         generator = visual.insertion_sort(array)
+    
       
     # creates a figure and subsequent subplots
     fig, ax = plt.subplots()
@@ -100,6 +101,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         algorithm: str,
         array: list = [random.randint(0, 10000) for i in range(5000)],
         n:int=5000,
+        to_show: bool = True,
     ) -> float:
         '''Runs an algorithm out of the list of algorithms
         
@@ -207,7 +209,8 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             activeforeground="#C0C0C0",
         )
         back_btn.place(x=10, y=10)
-        visualize(array, algorithm,titles)
+        if to_show:
+            visualize(array, algorithm,titles)
         return min(times)/10
 
     heading = tk.Label(
@@ -284,13 +287,13 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         sorted_array = sorted(array)
         if name == "Comparison when fully sorted":
             data = {
-                "Bubble Sort": run_algorithm("bubble_sort", sorted_array, n),
+                "Bubble Sort": run_algorithm("bubble_sort", sorted_array, n,False),
                 "Insertion Sort": run_algorithm(
-                    "insertion_sort", sorted_array,n
+                    "insertion_sort", sorted_array,n,False
                     ),
-                "Merge Sort": run_algorithm("merge_sort", sorted_array,n),
-                "Quick Sort": run_algorithm("quicksort", sorted_array,n),
-                "Built-in Sort(Tim Sort)": run_algorithm("sorted", sorted_array,n),
+                "Merge Sort": run_algorithm("merge_sort", sorted_array,n,False),
+                "Quick Sort": run_algorithm("quicksort", sorted_array,n,False),
+                "Built-in Sort(Tim Sort)": run_algorithm("sorted", sorted_array,n,False),
             }
         elif name == "Comparison when partially sorted":
             partiallly_sorted_array = sorted_array[: len(array) // 2] + [
@@ -298,28 +301,28 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             ]
             data = {
                 "Bubble Sort": run_algorithm(
-                    "bubble_sort", partiallly_sorted_array,n
+                    "bubble_sort", partiallly_sorted_array,n,False
                     ),
                 "Insertion Sort": run_algorithm(
-                    "insertion_sort", partiallly_sorted_array,n
+                    "insertion_sort", partiallly_sorted_array,n,False
                 ),
                 "Merge Sort": run_algorithm(
-                    "merge_sort", partiallly_sorted_array,n
+                    "merge_sort", partiallly_sorted_array,n,False
                     ),
                 "Quick Sort": run_algorithm(
-                    "quicksort", partiallly_sorted_array,n
+                    "quicksort", partiallly_sorted_array,n,False
                     ),
                  "Built-in Sort(Tim Sort)": run_algorithm(
-                     "sorted", partiallly_sorted_array,n
+                     "sorted", partiallly_sorted_array,n,False
                         ),
             }
         else:
             data = {
-                "Bubble Sort": run_algorithm("bubble_sort", array,n),
-                "Insertion Sort": run_algorithm("insertion_sort", array,n),
-                "Merge Sort": run_algorithm("merge_sort", array,n),
-                "Quick Sort": run_algorithm("quicksort", array,n),
-                "Built-in Sort(Tim Sort)": run_algorithm("sorted", array,n),
+                "Bubble Sort": run_algorithm("bubble_sort", array,n,False),
+                "Insertion Sort": run_algorithm("insertion_sort", array,n,False),
+                "Merge Sort": run_algorithm("merge_sort", array,n,False),
+                "Quick Sort": run_algorithm("quicksort", array,n,False),
+                "Built-in Sort(Tim Sort)": run_algorithm("sorted", array,n,False),
             }
         show_graph(root, name, data,n)
     
