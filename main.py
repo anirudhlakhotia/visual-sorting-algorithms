@@ -111,6 +111,8 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         The name of the algorithm to run
         array : list, optional
         The array to carry out the operation on
+        to_show: bool, optional
+        Whether to show the graph with visual depiction 
 
         Returns
         -------
