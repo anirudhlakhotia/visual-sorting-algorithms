@@ -250,14 +250,26 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         n=0
         is_make=id(function) == id(make_graph)
         def submit():
-            nonlocal n
-            n=int(no_of_elements.get())
-            root.destroy()
-            if is_make :
-                make_graph(win,name,n)
-            else:
+            def after_hint():
+                hint_window.destroy()
+                root.destroy()
                 array = [random.randint(0, 2*n) for i in range(n)]
                 run_algorithm(function,array,n)
+            nonlocal n
+            n=int(no_of_elements.get())
+            if is_make:
+                make_graph(win,name,n)
+            else:
+                hint_window=tk.Tk()
+                hint_window.title("Hint")
+                hint_window.geometry("600x300")
+                hint_window.configure(bg="black")
+                hint_label=tk.Label(hint_window,text="We recommend you use the built-in sorting algorithm in Python",bg="black",fg="cyan",font=("Helvetica",16))
+                hint_label.place(relx=0.5,rely=0.5,anchor=tk.CENTER)
+                tk.Label(hint_window,text="Automatically closing in 5 seconds",bg="black",fg="red",font=("Helvetica",16)).place(relx=0.5,rely=0.7,anchor=tk.CENTER)
+                hint_window.after(5000,after_hint)
+                hint_window.mainloop()
+            
     
         root=make_root()
         tk.Label(root, text="Enter the number of elements you wish to sort",bg=root['bg'],font=("Helvetica", 24)).place(relx=0.5, rely=0.1, anchor=tk.N,)
@@ -453,8 +465,6 @@ def show_graph(win: tk.Tk, name: str, data: dict,n=5000) -> None:
     win.destroy()
     root = make_root()
     root.title(name)
-    print(data['Quick Sort']/data['Built-in Sort(Tim Sort)'])
-    print('RATIO')
     languages = data.keys()
     time = data.values()
 
