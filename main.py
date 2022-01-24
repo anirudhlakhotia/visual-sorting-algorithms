@@ -111,6 +111,8 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         The name of the algorithm to run
         array : list, optional
         The array to carry out the operation on
+        n : int, optional
+        The number of elements in the array
         to_show: bool, optional
         Whether to show the graph with visual depiction 
 
@@ -250,7 +252,29 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         n=0
         is_make=id(function) == id(make_graph)
         def submit():
+            '''Runs the algorithm based on the input
+
+            Parameters
+            ----------
+            None
+
+            Returns
+            -------
+            None
+            '''
             def after_hint():
+                '''
+                Displays a hint about the algorithm recommended to the user
+
+                Parameters
+                ----------
+                None
+
+                Returns
+                -------
+                None
+
+                '''
                 hint_window.destroy()
                 root.destroy()
                 array = [random.randint(0, 2*n) for i in range(n)]
