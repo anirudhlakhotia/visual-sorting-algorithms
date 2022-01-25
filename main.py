@@ -50,6 +50,8 @@ def visualize(array: list, name:str, titles:dict):
         generator = visual.insertion_sort(array)
     elif name == 'quick_sort':
         generator = visual.quick_sort(array,0,len(array)-1)
+    elif name == 'merge_sort':
+        generator = visual.merge_sort(array,0,len(array)-1)
     
       
     # creates a figure and subsequent subplots
@@ -145,11 +147,13 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             "quick_sort": "Quick Sort",
             "sorted": "Built-in Sort(Tim Sort)",
         }
-        if algorithm =="quick_sort":
+
+        if algorithm =="quick_sort" or algorithm == "merge_sort":
             copy_of_array=array #Because Sorting is done in place and we need to keep the original array
             stmt = f"{algorithm}{copy_of_array,0,len(array)-1}" 
         else:
             stmt=f"{algorithm}({array})"
+
         # Set up the context and prepare the call to the specified
         # algorithm using the supplied array. Only import the
         # algorithm function if it's not the built-in `sorted()`.

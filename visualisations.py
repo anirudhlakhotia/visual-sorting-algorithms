@@ -75,3 +75,43 @@ def quick_sort(array, start, end):
     yield from quick_sort(array, pivot_index + 1, end)
 
 
+def merge_sort(array, start, end):
+    """Merge sort."""
+
+    if end <= start:
+        return
+
+    mid = start + ((end - start + 1) // 2) - 1
+    yield from merge_sort(array, start, mid)
+    yield from merge_sort(array, mid + 1, end)
+    yield from merge(array, start, mid, end)
+    yield array
+    
+    
+def merge(array, start, mid, end):
+    """Helper function for merge sort."""
+
+    merged = []
+    leftIdx = start
+    rightIdx = mid + 1
+
+    while leftIdx <= mid and rightIdx <= end:
+        if array[leftIdx] < array[rightIdx]:
+            merged.append(array[leftIdx])
+            leftIdx += 1
+        else:
+            merged.append(array[rightIdx])
+            rightIdx += 1
+
+    while leftIdx <= mid:
+        merged.append(array[leftIdx])
+        leftIdx += 1
+
+    while rightIdx <= end:
+        merged.append(array[rightIdx])
+        rightIdx += 1
+
+    for i, sorted_val in enumerate(merged):
+        array[start + i] = sorted_val
+        yield array
+
