@@ -57,6 +57,7 @@ def visualize(array: list, name:str, titles:dict):
     # creates a figure and subsequent subplots
     fig, ax = plt.subplots()
     fig.set_facecolor("black")
+    fig.canvas.set_window_title(titles[name])
     ax.set_title(f"{titles[name]} {complexity[name]}", color="white")
 
     ax.set_xlabel("Array Index", color="white")
@@ -168,7 +169,6 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         times = repeat(setup=setup_code, stmt=stmt, repeat=3, number=10)
         # Finally, display the name of the algorithm and the
         # minimum time it took to run
-        #print(f"{titles[algorithm]} :  seconds")
         root.title(titles[algorithm])
 
         algo_name = tk.Label(
@@ -231,7 +231,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             activeforeground="#C0C0C0",
         )
         back_btn.place(x=10, y=10)
-        if to_show:
+        if to_show and n<101:
             visualize(array, algorithm,titles)
         return min(times)/10
 
@@ -336,6 +336,8 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
     
         root=make_root()
         tk.Label(root, text="Enter the number of elements you wish to sort",bg=root['bg'],font=("Helvetica", 24)).place(relx=0.5, rely=0.1, anchor=tk.N,)
+        tk.Label(root, text="To see a live graph, enter a value less than 100",bg=root['bg'],fg="#FAD02C",font=("Helvetica", 20)).place(relx=0.5, rely=0.7, anchor=tk.N,)
+
         no_of_elements = tk.Entry(root,insertbackground="black",bg="black",fg="#C0C0C0",font=("Helvetica", 24))
         no_of_elements.place(relx=0.5, rely=0.2, anchor=tk.N)
         submit_btn=Button(root,text="Submit",command=submit,bg="#C0C0C0",borderless=True,fg="black",activebackground="black",activeforeground="#C0C0C0",padx=10,pady=10,font=("Helvetica", 24))
@@ -344,7 +346,6 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         
 
     def make_graph(win: tk.Tk, name: str, n:int) -> None:
-        #print(f"N in make graph is {n}")
         '''Creates a graph of the time taken to sort an array
          
         Parameters
@@ -359,7 +360,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         -------
         None
         '''
-       # print("MAKE GRAPH N",n)
+
         array = [random.randint(0, 2*n) for i in range(n)]
         sorted_array = sorted(array)
         if name == "Comparison when fully sorted":
