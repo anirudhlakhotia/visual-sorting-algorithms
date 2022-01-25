@@ -262,6 +262,24 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             -------
             None
             '''
+            def update_time(remaining:int) -> None:
+                '''Updates the timer on screen
+
+                Parameters
+                ----------
+                remaining : int
+                The number of seconds remaining
+
+                Returns
+                -------
+                None
+                '''
+                if remaining>-1:
+                    close_label.config(text=f"Automatically closing in {remaining} seconds")
+                    hint_window.after(1000, update_time, remaining-1)
+                else:
+                    after_hint()
+
             def after_hint():
                 '''
                 Displays a hint about the algorithm recommended to the user
@@ -290,9 +308,12 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                 hint_window.configure(bg="black")
                 hint_label=tk.Label(hint_window,text="We recommend you use the built-in sorting algorithm in Python",bg="black",fg="cyan",font=("Helvetica",16))
                 hint_label.place(relx=0.5,rely=0.5,anchor=tk.CENTER)
-                tk.Label(hint_window,text="Automatically closing in 5 seconds",bg="black",fg="red",font=("Helvetica",16)).place(relx=0.5,rely=0.7,anchor=tk.CENTER)
-                hint_window.after(5000,after_hint)
+                close_label=tk.Label(hint_window,text="Automatically closing in 5 seconds",bg="black",fg="red",font=("Helvetica",16))
+                close_label.place(relx=0.5,rely=0.7,anchor=tk.CENTER)
+                update_time(5)
                 hint_window.mainloop()
+                
+                
             
     
         root=make_root()
