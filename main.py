@@ -50,6 +50,8 @@ def visualize(array: list, name:str, titles:dict):
         generator = visual.insertion_sort(array)
     elif name == 'quick_sort':
         generator = visual.quick_sort(array,0,len(array)-1)
+    elif name == 'merge_sort':
+        generator = visual.merge_sort(array,0,len(array)-1)
     
       
     # creates a figure and subsequent subplots
