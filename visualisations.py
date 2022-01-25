@@ -1,3 +1,4 @@
+
 def bubble_sort(array):
     n = len(array)
     for i in range(n):
@@ -51,3 +52,26 @@ def insertion_sort(array):
         yield array
 
     return array
+ 
+ 
+def quick_sort(array, start, end):
+    """In-place Quick Sort."""
+
+    if start >= end:
+        return
+
+    pivot = array[end]
+    pivot_index = start
+
+    for i in range(start, end):
+        if array[i] < pivot:
+            array[i], array[pivot_index] = array[pivot_index], array[i]
+            pivot_index += 1
+        yield array
+    array[end],array[pivot_index]=array[pivot_index],array[end]
+    yield array
+
+    yield from quick_sort(array, start, pivot_index - 1)
+    yield from quick_sort(array, pivot_index + 1, end)
+
+

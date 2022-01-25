@@ -1,5 +1,3 @@
-from random import randint
-
 
 def bubble_sort(array):
     n = len(array)
@@ -112,31 +110,24 @@ def merge_sort(array):
     return merge(
         left=merge_sort(array[:midpoint]),
         right=merge_sort(array[midpoint:]))
+ 
+  
+def quick_sort(array, start, end):
+    """In-place Quick Sort."""
 
+    if start >= end:
+        return
 
-def quicksort(array):
-    # If the input array contains fewer than two elements,
-    # then return it as the result of the function
-    if len(array) < 2:
-        return array
+    pivot = array[end]
+    pivot_index = start
 
-    low, same, high = [], [], []
+    for i in range(start, end):
+        if array[i] < pivot:
+            array[i], array[pivot_index] = array[pivot_index], array[i]
+            pivot_index += 1
+    array[end],array[pivot_index]=array[pivot_index],array[end]
 
-    # Select your `pivot` element randomly
-    pivot = array[randint(0, len(array) - 1)]
+    quick_sort(array, start, pivot_index - 1)
+    quick_sort(array, pivot_index + 1, end)
+    return array
 
-    for item in array:
-        # Elements that are smaller than the `pivot` go to
-        # the `low` list. Elements that are larger than
-        # `pivot` go to the `high` list. Elements that are
-        # equal to `pivot` go to the `same` list.
-        if item < pivot:
-            low.append(item)
-        elif item == pivot:
-            same.append(item)
-        elif item > pivot:
-            high.append(item)
-
-    # The final result combines the sorted `low` list
-    # with the `same` list and the sorted `high` list
-    return quicksort(low) + same + quicksort(high)

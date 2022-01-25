@@ -48,6 +48,8 @@ def visualize(array: list, name:str, titles:dict):
        generator = visual.bubble_sort(array)
     elif name == 'insertion_sort':
         generator = visual.insertion_sort(array)
+    elif name == 'quick_sort':
+        generator = visual.quick_sort(array,0,len(array)-1)
     
       
     # creates a figure and subsequent subplots
@@ -140,10 +142,10 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             "bubble_sort": "Bubble Sort",
             "insertion_sort": "Insertion Sort",
             "merge_sort": "Merge Sort",
-            "quicksort": "Quick Sort",
+            "quick_sort": "Quick Sort",
             "sorted": "Built-in Sort(Tim Sort)",
         }
-        stmt = f"{algorithm}({array})"
+        stmt = f"{algorithm}{array,0,len(array)-1}" if algorithm == "quick_sort" else f"{algorithm}({array})"
         # Set up the context and prepare the call to the specified
         # algorithm using the supplied array. Only import the
         # algorithm function if it's not the built-in `sorted()`.
@@ -359,7 +361,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                     "insertion_sort", sorted_array,n,False
                     ),
                 "Merge Sort": run_algorithm("merge_sort", sorted_array,n,False),
-                "Quick Sort": run_algorithm("quicksort", sorted_array,n,False),
+                "Quick Sort": run_algorithm("quick_sort", sorted_array,n,False),
                 "Built-in Sort(Tim Sort)": run_algorithm("sorted", sorted_array,n,False),
             }
         elif name == "Comparison when partially sorted":
@@ -377,7 +379,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                     "merge_sort", partiallly_sorted_array,n,False
                     ),
                 "Quick Sort": run_algorithm(
-                    "quicksort", partiallly_sorted_array,n,False
+                    "quick_sort", partiallly_sorted_array,n,False
                     ),
                  "Built-in Sort(Tim Sort)": run_algorithm(
                      "sorted", partiallly_sorted_array,n,False
@@ -388,7 +390,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                 "Bubble Sort": run_algorithm("bubble_sort", array,n,False),
                 "Insertion Sort": run_algorithm("insertion_sort", array,n,False),
                 "Merge Sort": run_algorithm("merge_sort", array,n,False),
-                "Quick Sort": run_algorithm("quicksort", array,n,False),
+                "Quick Sort": run_algorithm("quick_sort", array,n,False),
                 "Built-in Sort(Tim Sort)": run_algorithm("sorted", array,n,False),
             }
         show_graph(root, name, data,n)
@@ -479,11 +481,11 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
     )
     merge_sort_btn.grid(row=1, column=1, sticky="eW")
 
-    quicksort_btn = Button(
+    quick_sort_btn = Button(
         button_frame,
         text="Quick Sort",
         font=("Helvetica", 20),
-        command=lambda: get_value(root,"Quick Sort","quicksort"),
+        command=lambda: get_value(root,"Quick Sort","quick_sort"),
         borderless=True,
         pady=25,
         bg="#1b1b1b",
@@ -491,7 +493,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         activebackground="white",
         activeforeground="black",
     )
-    quicksort_btn.grid(row=1, column=2, sticky="eW")
+    quick_sort_btn.grid(row=1, column=2, sticky="eW")
 
     button_frame.grid_columnconfigure(0, weight=1)
     button_frame.grid_rowconfigure(0, weight=1)
@@ -591,7 +593,7 @@ that builds the final sorted array (or list) one item at a time.",
     "merge_sort": """Merge Sort comparison-based sorting algorithm. Most implementations
 produce a stable sort, which means that the order of equal elements is the
 same in the input and output. Merge sort is a divide and conquer algorithm""",
-    "quicksort": "Quicksort is a divide-and-conquer algorithm.\n\
+    "quick_sort": "Quicksort is a divide-and-conquer algorithm.\n\
 It works by selecting a 'pivot' element from the array \
 and partitioning the other elements into two sub-arrays,\n\
 according to whether they are less than or greater than the pivot\n\
@@ -604,7 +606,7 @@ complexity = {
     "bubble_sort": "O(n^2)",
     "insertion_sort": "O(n^2)",
     "merge_sort": "O(n log n)",
-    "quicksort": "O(n log n)",
+    "quick_sort": "O(n log n)",
     "sorted": "O(n log n) ",
     }
 init_window()
