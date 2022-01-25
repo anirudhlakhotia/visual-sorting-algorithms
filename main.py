@@ -148,6 +148,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             "sorted": "Built-in Sort(Tim Sort)",
         }
         if algorithm == "quick_sort" or algorithm == 'merge_sort':
+            copy_of_array=array #Because Sorting is done in place and we need to keep the original array
             stmt = f"{algorithm}{array,0,len(array)-1} "
         else:
             stmt= f"{algorithm}({array})"
