@@ -147,7 +147,10 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             "quick_sort": "Quick Sort",
             "sorted": "Built-in Sort(Tim Sort)",
         }
-        stmt = f"{algorithm}{array,0,len(array)-1}" if algorithm == "quick_sort" else f"{algorithm}({array})"
+        if algorithm == "quick_sort" or algorithm == 'merge_sort':
+            stmt = f"{algorithm}{array,0,len(array)-1} "
+        else:
+            stmt= f"{algorithm}({array})"
         # Set up the context and prepare the call to the specified
         # algorithm using the supplied array. Only import the
         # algorithm function if it's not the built-in `sorted()`.

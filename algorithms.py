@@ -62,10 +62,10 @@ def merge_sort(A, start, end):
         return
 
     mid = start + ((end - start + 1) // 2) - 1
-    yield from merge_sort(A, start, mid)
-    yield from merge_sort(A, mid + 1, end)
-    yield from merge(A, start, mid, end)
-    yield A
+    return merge_sort(A, start, mid)
+    return merge_sort(A, mid + 1, end)
+    return merge(A, start, mid, end)
+    return A
 def merge(A, start, mid, end):
     """Helper function for merge sort."""
 
@@ -91,7 +91,7 @@ def merge(A, start, mid, end):
 
     for i, sorted_val in enumerate(merged):
         A[start + i] = sorted_val
-        yield A
+        return A
 '''
 def merge(left, right):
     # If the first array is empty, then nothing needs
