@@ -52,8 +52,16 @@ def visualize(array: list, name:str, titles:dict):
       
     # creates a figure and subsequent subplots
     fig, ax = plt.subplots()
-    ax.set_title(f"{titles[name]} {complexity[name]}")
-    bar_sub = ax.bar(range(len(array)), array, align="edge")
+    fig.set_facecolor("black")
+    ax.set_title(f"{titles[name]} {complexity[name]}", color="white")
+
+    ax.set_xlabel("Array Index", color="white")
+    ax.set_ylabel("Array Value", color="white")
+    ax.set_facecolor("black")
+    ax.tick_params(axis="y", colors="white")
+    ax.tick_params(axis="x", colors="white")
+    
+    bar_sub = ax.bar(range(len(array)), array, align="edge", color="#6669eb")
       
     # sets the maximum limit for the x-axis
     ax.set_xlim(0, len(array))
