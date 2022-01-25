@@ -1,7 +1,4 @@
 
-from numpy import array
-
-
 def bubble_sort(array):
     n = len(array)
     for i in range(n):
@@ -78,18 +75,20 @@ def quick_sort(array, start, end):
     yield from quick_sort(array, pivot_index + 1, end)
 
 
-def merge_sort(A, start, end):
+def merge_sort(array, start, end):
     """Merge sort."""
 
     if end <= start:
         return
 
     mid = start + ((end - start + 1) // 2) - 1
-    yield from merge_sort(A, start, mid)
-    yield from merge_sort(A, mid + 1, end)
-    yield from merge(A, start, mid, end)
-    yield A
-def merge(A, start, mid, end):
+    yield from merge_sort(array, start, mid)
+    yield from merge_sort(array, mid + 1, end)
+    yield from merge(array, start, mid, end)
+    yield array
+    
+    
+def merge(array, start, mid, end):
     """Helper function for merge sort."""
 
     merged = []
@@ -97,40 +96,22 @@ def merge(A, start, mid, end):
     rightIdx = mid + 1
 
     while leftIdx <= mid and rightIdx <= end:
-        if A[leftIdx] < A[rightIdx]:
-            merged.append(A[leftIdx])
+        if array[leftIdx] < array[rightIdx]:
+            merged.append(array[leftIdx])
             leftIdx += 1
         else:
-            merged.append(A[rightIdx])
+            merged.append(array[rightIdx])
             rightIdx += 1
 
     while leftIdx <= mid:
-        merged.append(A[leftIdx])
+        merged.append(array[leftIdx])
         leftIdx += 1
 
     while rightIdx <= end:
-        merged.append(A[rightIdx])
+        merged.append(array[rightIdx])
         rightIdx += 1
 
     for i, sorted_val in enumerate(merged):
-        A[start + i] = sorted_val
-        yield A
-def quick_sort(array, start, end):
-    """In-place Quick Sort."""
-
-    if start >= end:
-        return
-
-    pivot = array[end]
-    pivot_index = start
-
-    for i in range(start, end):
-        if array[i] < pivot:
-            array[i], array[pivot_index] = array[pivot_index], array[i]
-            pivot_index += 1
-    array[end],array[pivot_index]=array[pivot_index],array[end]
-
-    quick_sort(array, start, pivot_index - 1)
-    quick_sort(array, pivot_index + 1, end)
-    return array
+        array[start + i] = sorted_val
+        yield array
 
