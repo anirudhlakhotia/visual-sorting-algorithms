@@ -336,8 +336,8 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
     
         root=make_root()
         tk.Label(root, text="Enter the number of elements you wish to sort",bg=root['bg'],font=("Helvetica", 24)).place(relx=0.5, rely=0.1, anchor=tk.N,)
-        tk.Label(root, text="To see a live graph, enter a value less than 100",bg=root['bg'],fg="#FAD02C",font=("Helvetica", 20)).place(relx=0.5, rely=0.7, anchor=tk.N,)
-
+        if not is_make:
+            tk.Label(root, text="To see a live graph, enter a value less than 100",bg=root['bg'],fg="#FAD02C",font=("Helvetica", 20)).place(relx=0.5, rely=0.7, anchor=tk.N,)
         no_of_elements = tk.Entry(root,insertbackground="black",bg="black",fg="#C0C0C0",font=("Helvetica", 24))
         no_of_elements.place(relx=0.5, rely=0.2, anchor=tk.N)
         submit_btn=Button(root,text="Submit",command=submit,bg="#C0C0C0",borderless=True,fg="black",activebackground="black",activeforeground="#C0C0C0",padx=10,pady=10,font=("Helvetica", 24))
