@@ -57,7 +57,7 @@ def visualize(array: list, name:str, titles:dict):
     # creates a figure and subsequent subplots
     fig, ax = plt.subplots()
     fig.set_facecolor("black")
-    fig.canvas.set_window_title(titles[name])
+    fig.canvas.manager.set_window_title(titles[name])
     ax.set_title(f"{titles[name]} {complexity[name]}", color="white")
 
     ax.set_xlabel("Array Index", color="white")
