@@ -36,7 +36,11 @@ python3 main.py
 Check out the demo for a quick example of how the project works!
 
 
-https://user-images.githubusercontent.com/92427479/151552915-42a731a9-009f-4a88-8911-a470b20efab8.mp4
+
+https://user-images.githubusercontent.com/92427479/151554077-5245f503-c391-4e1f-a1e3-9705c54021fd.mp4
+
+
+
 
 ## Contributing
 
