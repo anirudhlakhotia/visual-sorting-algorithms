@@ -62,9 +62,9 @@ def merge_sort(A, start, end):
         return
 
     mid = start + ((end - start + 1) // 2) - 1
-    return merge_sort(A, start, mid)
-    return merge_sort(A, mid + 1, end)
-    return merge(A, start, mid, end)
+    merge_sort(A, start, mid)
+    merge_sort(A, mid + 1, end)
+    merge(A, start, mid, end)
     return A
 def merge(A, start, mid, end):
     """Helper function for merge sort."""
@@ -91,7 +91,6 @@ def merge(A, start, mid, end):
 
     for i, sorted_val in enumerate(merged):
         A[start + i] = sorted_val
-        return A
 
 
 def quick_sort(array, start, end):
