@@ -35,7 +35,8 @@ python3 main.py
 ## Demo
 Check out the demo for a quick example of how the project works!
 
-![Demo GIF](https://user-images.githubusercontent.com/92427479/149163000-3e46b32f-b6d6-44de-9014-d6b23b01d583.gif)
+
+https://user-images.githubusercontent.com/92427479/151552915-42a731a9-009f-4a88-8911-a470b20efab8.mp4
 
 ## Contributing
 
