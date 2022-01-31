@@ -37,7 +37,7 @@ Check out the demo for a quick example of how the project works!
 
 
 
-https://user-images.githubusercontent.com/92427479/151554077-5245f503-c391-4e1f-a1e3-9705c54021fd.mp4
+![finm](https://user-images.githubusercontent.com/92427479/151750409-58f77766-95d6-432b-8916-5d1ceb3fb3d3.gif)
 
 
 
