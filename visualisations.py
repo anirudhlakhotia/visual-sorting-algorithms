@@ -1,25 +1,25 @@
-
 def bubble_sort(array):
     n = len(array)
     for i in range(n):
-        '''Check if its already sorted
-        already_sorted = True'''
+        """Check if its already sorted
+        already_sorted = True"""
 
         for j in range(n - i - 1):
             if array[j] > array[j + 1]:
-                ''' If the item you're looking at is greater than its
-                adjacent value, then swap them'''
+                """If the item you're looking at is greater than its
+                adjacent value, then swap them"""
                 array[j], array[j + 1] = array[j + 1], array[j]
 
                 # Since you had to swap two elements
                 # set the `already_sorted` flag to `False` so the
                 # algorithm doesn't finish prematurely
-                '''already_sorted = False'''
+                """already_sorted = False"""
             yield array
         # If there were no swaps during the last iteration,
         # the array is already sorted, and you can terminate
-        '''if already_sorted:
-            break'''
+        """if already_sorted:
+            break"""
+
 
 def insertion_sort(array):
     # Loop from the second element of the array until
@@ -52,8 +52,8 @@ def insertion_sort(array):
         yield array
 
     return array
- 
- 
+
+
 def quick_sort(array, start, end):
     """In-place Quick Sort."""
 
@@ -68,7 +68,7 @@ def quick_sort(array, start, end):
             array[i], array[pivot_index] = array[pivot_index], array[i]
             pivot_index += 1
         yield array
-    array[end],array[pivot_index]=array[pivot_index],array[end]
+    array[end], array[pivot_index] = array[pivot_index], array[end]
     yield array
 
     yield from quick_sort(array, start, pivot_index - 1)
@@ -86,32 +86,31 @@ def merge_sort(array, start, end):
     yield from merge_sort(array, mid + 1, end)
     yield from merge(array, start, mid, end)
     yield array
-    
-    
+
+
 def merge(array, start, mid, end):
     """Helper function for merge sort."""
 
     merged = []
-    leftIdx = start
-    rightIdx = mid + 1
+    left_index = start
+    right_index = mid + 1
 
-    while leftIdx <= mid and rightIdx <= end:
-        if array[leftIdx] < array[rightIdx]:
-            merged.append(array[leftIdx])
-            leftIdx += 1
+    while left_index <= mid and right_index <= end:
+        if array[left_index] < array[right_index]:
+            merged.append(array[left_index])
+            left_index += 1
         else:
-            merged.append(array[rightIdx])
-            rightIdx += 1
+            merged.append(array[right_index])
+            right_index += 1
 
-    while leftIdx <= mid:
-        merged.append(array[leftIdx])
-        leftIdx += 1
+    while left_index <= mid:
+        merged.append(array[left_index])
+        left_index += 1
 
-    while rightIdx <= end:
-        merged.append(array[rightIdx])
-        rightIdx += 1
+    while right_index <= end:
+        merged.append(array[right_index])
+        right_index += 1
 
     for i, sorted_val in enumerate(merged):
         array[start + i] = sorted_val
         yield array
-

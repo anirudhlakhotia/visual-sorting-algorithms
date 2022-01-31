@@ -1,25 +1,24 @@
-
 def bubble_sort(array):
     n = len(array)
     for i in range(n):
-        '''Check if its already sorted
-        already_sorted = True'''
+        """Check if its already sorted
+        already_sorted = True"""
 
         for j in range(n - i - 1):
             if array[j] > array[j + 1]:
-                ''' If the item you're looking at is greater than its
-                adjacent value, then swap them'''
+                """If the item you're looking at is greater than its
+                adjacent value, then swap them"""
                 array[j], array[j + 1] = array[j + 1], array[j]
 
                 # Since you had to swap two elements
                 # set the `already_sorted` flag to `False` so the
                 # algorithm doesn't finish prematurely
-                '''already_sorted = False'''
+                """already_sorted = False"""
 
         # If there were no swaps during the last iteration,
         # the array is already sorted, and you can terminate
-        '''if already_sorted:
-            break'''
+        """if already_sorted:
+            break"""
 
     return array
 
@@ -66,28 +65,30 @@ def merge_sort(A, start, end):
     merge_sort(A, mid + 1, end)
     merge(A, start, mid, end)
     return A
+
+
 def merge(A, start, mid, end):
     """Helper function for merge sort."""
 
     merged = []
-    leftIdx = start
-    rightIdx = mid + 1
+    left_index = start
+    right_index = mid + 1
 
-    while leftIdx <= mid and rightIdx <= end:
-        if A[leftIdx] < A[rightIdx]:
-            merged.append(A[leftIdx])
-            leftIdx += 1
+    while left_index <= mid and right_index <= end:
+        if A[left_index] < A[right_index]:
+            merged.append(A[left_index])
+            left_index += 1
         else:
-            merged.append(A[rightIdx])
-            rightIdx += 1
+            merged.append(A[right_index])
+            right_index += 1
 
-    while leftIdx <= mid:
-        merged.append(A[leftIdx])
-        leftIdx += 1
+    while left_index <= mid:
+        merged.append(A[left_index])
+        left_index += 1
 
-    while rightIdx <= end:
-        merged.append(A[rightIdx])
-        rightIdx += 1
+    while right_index <= end:
+        merged.append(A[right_index])
+        right_index += 1
 
     for i, sorted_val in enumerate(merged):
         A[start + i] = sorted_val
@@ -106,9 +107,8 @@ def quick_sort(array, start, end):
         if array[i] < pivot:
             array[i], array[pivot_index] = array[pivot_index], array[i]
             pivot_index += 1
-    array[end],array[pivot_index]=array[pivot_index],array[end]
+    array[end], array[pivot_index] = array[pivot_index], array[end]
 
     quick_sort(array, start, pivot_index - 1)
     quick_sort(array, pivot_index + 1, end)
     return array
-
