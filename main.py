@@ -472,6 +472,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         font=("Helvetica", 20),
         command=lambda: get_value(root, title, make_graph),
         pady=15,
+        padx=10,
         borderless=True,
         bg="yellow",
         fg="#252930",
@@ -488,12 +489,13 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         command=lambda: get_value(
             root, "Comparison when fully sorted", make_graph),
         pady=15,
+        padx=10,
         bg="#32CBF1",
         fg="#252930",
         activebackground="white",
         activeforeground="black",
     )
-    sorted_btn.place(anchor=tk.N, relx=0.5, rely=0.7)
+    sorted_btn.place(anchor=tk.N, relx=0.511, rely=0.7)
 
     partially_sorted_btn = Button(
         root,
@@ -503,6 +505,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         command=lambda: get_value(
             root, "Comparison when partially sorted", make_graph),
         pady=15,
+        padx=10,
         bg="#6ECB5A",
         fg="#252930",
         activebackground="white",
