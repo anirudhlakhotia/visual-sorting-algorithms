@@ -107,7 +107,6 @@ def visualize(array: list, name: str, titles: dict):
 
 
 def init_window(title: str = "Comparison when unsorted ") -> None:
-
     """Creates a window
 
     Parameters
@@ -161,7 +160,8 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         }
 
         if algorithm == "quick_sort" or algorithm == "merge_sort":
-            copy_of_array = array  # Because Sorting is done in place and we need to keep the original array
+            # Because Sorting is done in place and we need to keep the original array
+            copy_of_array = array
             stmt = f"{algorithm}{copy_of_array,0,len(array)-1}"
         else:
             stmt = f"{algorithm}({array})"
@@ -190,8 +190,9 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         algo_name.place(relx=0.5, rely=0.05, anchor=tk.N)
         min_time = tk.Label(
             root,
-            text=f"Minimum time to sort {n} elements: \
-{ (min(times))/10} seconds",
+            text=f"""
+            Minimum time to sort {n} elements: \
+{ (min(times))/10} seconds""",
             bg="black",
             fg="green",
             font=("Helvetica", 26),
@@ -484,7 +485,8 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         text="Comparison when fully sorted",
         font=("Helvetica", 20),
         borderless=True,
-        command=lambda: get_value(root, "Comparison when fully sorted", make_graph),
+        command=lambda: get_value(
+            root, "Comparison when fully sorted", make_graph),
         pady=15,
         bg="#32CBF1",
         fg="#252930",
@@ -498,7 +500,8 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         text="Comparison when partially sorted",
         font=("Helvetica", 20),
         borderless=True,
-        command=lambda: get_value(root, "Comparison when partially sorted", make_graph),
+        command=lambda: get_value(
+            root, "Comparison when partially sorted", make_graph),
         pady=15,
         bg="#6ECB5A",
         fg="#252930",
@@ -594,7 +597,8 @@ def show_graph(win: tk.Tk, name: str, data: dict, n=5000) -> None:
     time = data.values()
 
     # create a figure
-    figure = Figure(figsize=(8, 8), dpi=100, facecolor="black", edgecolor="black")
+    figure = Figure(figsize=(8, 8), dpi=100,
+                    facecolor="black", edgecolor="black")
     # create FigureCanvasTkAgg object
     figure_canvas = FigureCanvasTkAgg(figure, root)
     # create the toolbar
@@ -640,7 +644,8 @@ def show_graph(win: tk.Tk, name: str, data: dict, n=5000) -> None:
         fontsize=26,
         color="#C0C0C0",
     )
-    axes.set_xlabel("Sorting Algorithms", labelpad=15, fontsize=26, color="#C0C0C0")
+    axes.set_xlabel("Sorting Algorithms", labelpad=15,
+                    fontsize=26, color="#C0C0C0")
     axes.set_facecolor("black")
     axes.tick_params(axis="y", colors="#C0C0C0")
     axes.tick_params(axis="x", colors="#C0C0C0")
@@ -654,20 +659,19 @@ descriptions = {
     "bubble_sort": """Bubble Sort, sometimes referred to as sinking sort,
 is a simple sorting algorithm that repeatedly steps through the list,
 compares adjacent elements and swaps them if they are in the wrong order.""",
-    "insertion_sort": "Insertion Sort is a simple sorting algorithm, \
-that builds the final sorted array (or list) one item at a time.",
+    "insertion_sort": """Insertion Sort is a simple sorting algorithm,
+that builds the final sorted array (or list) one item at a time.""",
     "merge_sort": """Merge Sort comparison-based sorting algorithm. Most implementations
 produce a stable sort, which means that the order of equal elements is the
 same in the input and output. Merge sort is a divide and conquer algorithm""",
-    "quick_sort": "Quicksort is a divide-and-conquer algorithm.\n\
-It works by selecting a 'pivot' element from the array \
-and partitioning the other elements into two sub-arrays,\n\
-according to whether they are less than or greater than the pivot\n\
-For this reason, it is sometimes called partition-exchange sort.\n\
-The sub-arrays are then sorted recursively. ",
-    "sorted": "The built in sort function in Python is Tim Sort.\n\
-It implements the idea that the real-world data sets almost always contain already ordered subsequences,\n\
-so the sorting strategy is to identify them and sort them further using both merge and insert methods",
+    "quick_sort": """Quicksort is a divide-and-conquer algorithm.
+It works by selecting a 'pivot' element from the array and partitioning the other elements
+into two sub-arrays, according to whether they are less than or greater than the pivot.
+For this reason, it is sometimes called partition-exchange sort.
+The sub-arrays are then sorted recursively.""",
+    "sorted": """The built in sort function in Python is Tim Sort.
+It implements the idea that the real-world data sets almost always contain already ordered subsequences,
+so the sorting strategy is to identify them and sort them further using both merge and insert methods""",
 }
 
 complexity = {
