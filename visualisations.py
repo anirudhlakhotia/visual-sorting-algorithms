@@ -117,7 +117,8 @@ def merge(array, start, mid, end):
 
 
 def count_sort(array):
-    # TODO: explain steps
+    """Count Sort."""
+
     count = [0] * (max(array) + 1)
     for i in range(0, len(array)):
         count[array[i]] += 1

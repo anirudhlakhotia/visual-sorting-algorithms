@@ -694,8 +694,8 @@ It works by selecting a 'pivot' element from the array and partitioning the othe
 into two sub-arrays, according to whether they are less than or greater than the pivot.
 For this reason, it is sometimes called partition-exchange sort.
 The sub-arrays are then sorted recursively.""",
-    "count_sort": """Counting sort is an algorithm for sorting a collection of objects according
-to keys that are small positive integers, it is not a comparison sort; it uses key values as
+    "count_sort": """Counting sort is an algorithm for sorting a collection of objects based on 
+    keys that are small positive integers, it is not a comparison sort; it uses key values as
 indexes into an array, the Ω(n log n) lower bound for comparison sorting does not apply.""",
     "sorted": """The built in sort function in Python is Tim Sort.
 It implements the idea that the real-world data sets almost always contain already ordered subsequences,
