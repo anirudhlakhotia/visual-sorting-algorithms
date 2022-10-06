@@ -114,3 +114,16 @@ def merge(array, start, mid, end):
     for i, sorted_val in enumerate(merged):
         array[start + i] = sorted_val
         yield array
+
+
+def count_sort(array):
+    # TODO: explain steps
+    count = [0] * (max(array) + 1)
+    for i in range(0, len(array)):
+        count[array[i]] += 1
+    j = 0
+    for i in range(0, len(count)):
+        for k in range(0, count[i]):
+            array[j] = i
+            j += 1
+            yield array

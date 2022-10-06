@@ -35,5 +35,13 @@ def test_insertion_sort():
     assert array == sorted(copy_of_array), "Insertion sort failed."
 
 
+def test_count_sort():
+    """Test count sort."""
+    array = [random.randint(0, 100) for i in range(10)]
+    copy_of_array = array[:]
+    algorithms.count_sort(array)
+    assert array == sorted(copy_of_array), "Count sort failed."
+
+
 if __name__ == "__main__":
     pytest.main(["-v", "tests.py"])
