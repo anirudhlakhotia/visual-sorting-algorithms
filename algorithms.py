@@ -118,11 +118,10 @@ def count_sort(array):
     """Count Sort."""
 
     # Trying my own implementation(should be same time complexity O(m+2*n))
-    count = [0] * 10000
+    count = [0] * (max(array) + 1)
     for i in range(0, len(array)):
         count[array[i]] += 1
     j = 0
-    print(count[0:11])
     for i in range(0, len(count)):
         for k in range(0, count[i]):
             array[j] = i

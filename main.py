@@ -64,6 +64,8 @@ def visualize(array: list, name: str, titles: dict):
         generator = visual.quick_sort(array, 0, len(array) - 1)
     elif name == "merge_sort":
         generator = visual.merge_sort(array, 0, len(array) - 1)
+    elif name == "count_sort":
+        generator = visual.count_sort(array)
 
     # creates a figure and subsequent subplots
     fig, ax = plt.subplots()
@@ -156,6 +158,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             "insertion_sort": "Insertion Sort",
             "merge_sort": "Merge Sort",
             "quick_sort": "Quick Sort",
+            "count_sort": "Count Sort",
             "sorted": "Built-in Sort(Tim Sort)",
         }
 
@@ -431,29 +434,33 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                 ),
                 "Merge Sort": run_algorithm("merge_sort", sorted_array, n, False),
                 "Quick Sort": run_algorithm("quick_sort", sorted_array, n, False),
+                "Count Sort": run_algorithm("count_sort", sorted_array, n, False),
                 "Built-in Sort(Tim Sort)": run_algorithm(
                     "sorted", sorted_array, n, False
                 ),
             }
         elif name == "Comparison when partially sorted":
-            partiallly_sorted_array = sorted_array[: len(array) // 2] + [
+            partially_sorted_array = sorted_array[: len(array) // 2] + [
                 random.randint(0, n) for i in range(len(array) // 2)
             ]
             data = {
                 "Bubble Sort": run_algorithm(
-                    "bubble_sort", partiallly_sorted_array, n, False
+                    "bubble_sort", partially_sorted_array, n, False
                 ),
                 "Insertion Sort": run_algorithm(
-                    "insertion_sort", partiallly_sorted_array, n, False
+                    "insertion_sort", partially_sorted_array, n, False
                 ),
                 "Merge Sort": run_algorithm(
-                    "merge_sort", partiallly_sorted_array, n, False
+                    "merge_sort", partially_sorted_array, n, False
                 ),
                 "Quick Sort": run_algorithm(
-                    "quick_sort", partiallly_sorted_array, n, False
+                    "quick_sort", partially_sorted_array, n, False
+                ),
+                "Count Sort": run_algorithm(
+                    "count_sort", partially_sorted_array, n, False
                 ),
                 "Built-in Sort(Tim Sort)": run_algorithm(
-                    "sorted", partiallly_sorted_array, n, False
+                    "sorted", partially_sorted_array, n, False
                 ),
             }
         else:
@@ -462,6 +469,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                 "Insertion Sort": run_algorithm("insertion_sort", array, n, False),
                 "Merge Sort": run_algorithm("merge_sort", array, n, False),
                 "Quick Sort": run_algorithm("quick_sort", array, n, False),
+                "Count Sort": run_algorithm("count_sort", array, n, False),
                 "Built-in Sort(Tim Sort)": run_algorithm("sorted", array, n, False),
             }
         show_graph(root, name, data, n)
@@ -571,6 +579,20 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
     )
     quick_sort_btn.grid(row=1, column=2, sticky="eW")
 
+    count_sort_btn = Button(
+        button_frame,
+        text="Count Sort",
+        font=("Helvetica", 20),
+        command=lambda: get_value(root, "Count Sort", "count_sort"),
+        borderless=True,
+        pady=25,
+        bg="#1b1b1b",
+        fg="#C0C0C0",
+        activebackground="white",
+        activeforeground="black",
+    )
+    count_sort_btn.grid(row=3, column=1, sticky="eW")
+
     button_frame.grid_columnconfigure(0, weight=1)
     button_frame.grid_rowconfigure(0, weight=1)
     root.configure(bg="black")
@@ -672,6 +694,9 @@ It works by selecting a 'pivot' element from the array and partitioning the othe
 into two sub-arrays, according to whether they are less than or greater than the pivot.
 For this reason, it is sometimes called partition-exchange sort.
 The sub-arrays are then sorted recursively.""",
+    "count_sort": """Counting sort is an algorithm for sorting a collection of objects according
+to keys that are small positive integers, it is not a comparison sort; it uses key values as
+indexes into an array, the Ω(n log n) lower bound for comparison sorting does not apply.""",
     "sorted": """The built in sort function in Python is Tim Sort.
 It implements the idea that the real-world data sets almost always contain already ordered subsequences,
 so the sorting strategy is to identify them and sort them further using both merge and insert methods""",
@@ -682,6 +707,7 @@ complexity = {
     "insertion_sort": "O(n^2)",
     "merge_sort": "O(n log n)",
     "quick_sort": "O(n log n)",
+    "count_sort": "O(n+k) ∈ k is range of values",
     "sorted": "O(n log n) ",
 }
 init_window()
