@@ -117,7 +117,6 @@ def quick_sort(array, start, end):
 def count_sort(array):
     """Count Sort."""
 
-    # Trying my own implementation(should be same time complexity O(m+2*n))
     count = [0] * (max(array) + 1)
     for i in range(0, len(array)):
         count[array[i]] += 1
