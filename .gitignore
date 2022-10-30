@@ -109,6 +109,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+sortVis/
 
 # Spyder project settings
 .spyderproject
@@ -130,3 +131,4 @@ dmypy.json
 
 # For me
 changes
+todo
