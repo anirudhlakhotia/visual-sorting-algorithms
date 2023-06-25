@@ -8,6 +8,7 @@ import matplotlib
 from matplotlib import animation
 import random
 import visualisations as visual
+from tkinter import ttk
 
 matplotlib.use("TkAgg")
 plt.style.use("seaborn-dark")
@@ -341,7 +342,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                 hint_window = tk.Tk()
                 hint_window.title("Hint")
                 hint_window.geometry("600x300")
-                hint_window.configure(bg="black")
+                hint_window.configure(bg="black ")
                 hint_label = tk.Label(
                     hint_window,
                     text="We recommend you use the built-in sorting algorithm in Python",
@@ -406,6 +407,33 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
             font=("Helvetica", 24),
         )
         submit_btn.place(relx=0.5, rely=0.35, anchor=tk.CENTER)
+        if name == "Compare between 2 algorithms":
+                algos = ["Bubble Sort",
+                    "Insertion Sort",
+                    "Merge Sort",
+                    "Quick Sort",
+                    "Count Sort",
+                    "Built-in Sort(Tim Sort)",
+                    ]
+                drop_down1 = ttk.Combobox(root, value = algos)
+                drop_down1.current(0)
+                drop_down1.pack(pady=20)
+                drop_down2 = ttk.Combobox(root, value = algos)
+                drop_down2.current(0)
+                drop_down2.pack(pady=20)
+                print("the above one")
+                def what(e):
+                    global alg1
+                    alg1 = (drop_down1.get())
+                def what1(e):
+                    global alg2
+                    alg2 =(drop_down2.get())
+                drop_down1.bind("<<ComboboxSelected>>",what)
+                drop_down2.bind("<<ComboboxSelected>>",what1)
+                
+                
+
+        
         root.mainloop()
 
     def make_graph(win: tk.Tk, name: str, n: int) -> None:
@@ -463,7 +491,7 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                     "sorted", partially_sorted_array, n, False
                 ),
             }
-        else:
+        elif name == "Comparison when unsorted ":
             data = {
                 "Bubble Sort": run_algorithm("bubble_sort", array, n, False),
                 "Insertion Sort": run_algorithm("insertion_sort", array, n, False),
@@ -472,6 +500,21 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
                 "Count Sort": run_algorithm("count_sort", array, n, False),
                 "Built-in Sort(Tim Sort)": run_algorithm("sorted", array, n, False),
             }
+
+        elif name == "Compare between 2 algorithms":
+            data1 = {
+                "Bubble Sort": run_algorithm("bubble_sort", array, n, False),
+                "Insertion Sort": run_algorithm("insertion_sort", array, n, False),
+                "Merge Sort": run_algorithm("merge_sort", array, n, False),
+                "Quick Sort": run_algorithm("quick_sort", array, n, False),
+                "Count Sort": run_algorithm("count_sort", array, n, False),
+                "Built-in Sort(Tim Sort)": run_algorithm("sorted", array, n, False),
+            }
+            data = {
+                alg1:data1[alg1],
+                alg2:data1[alg2]
+            }
+            
         show_graph(root, name, data, n)
 
     unsorted_btn = Button(
@@ -517,6 +560,22 @@ def init_window(title: str = "Comparison when unsorted ") -> None:
         activeforeground="black",
     )
     partially_sorted_btn.place(anchor=tk.N, relx=0.2, rely=0.7)
+
+
+    Compare_between_2 = Button(
+        root,
+        text="Compare between 2 algorithms",
+        font=("Helvetica", 20),
+        borderless=True,
+        command=lambda: get_value( 
+           root, "Compare between 2 algorithms", make_graph),
+        pady=15,
+        bg="#6ECB5A",
+        fg="#252930",
+        activebackground="white",
+        activeforeground="black",
+    )
+    Compare_between_2.place(anchor=tk.N, relx=0.4, rely=0.8)
 
     bubble_sort_btn = Button(
         button_frame,
